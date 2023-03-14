@@ -3,16 +3,30 @@
 class OsLiczbowa
 {
 public:
-	double osMax, osMin;
+	double osMax = -10;
+	double osMin = 10;
+	double interval = 1;
 
-	OsLiczbowa() { osMin = -10; osMax = 10; };
-
+	//bz arg 
+	OsLiczbowa() {};
+	// dwuarg
+	OsLiczbowa(int i) {};
+	//kopiuj¹cy
+	OsLiczbowa(const OsLiczbowa& OsLiczbowa1);
+	//dekonstuktor
+	~OsLiczbowa();
 
 };
 
-OsLiczbowa Os1;
+OsLiczbowa::OsLiczbowa() {};
+
+void auxFun(OsLiczbowa)
+{
+	OsLiczbowa* p1 = new OsLiczbowa;
+
+}
 
 int main()
 {
-	std::cout << Os1.osMax;
+
 }
