@@ -2,11 +2,11 @@
 
 class OsLiczbowa
 {
-public:
+
 	double osMax = -10;
 	double osMin = 10;
 	double interval = 1;
-
+public:
 	//bz arg 
 	OsLiczbowa() {};
 	// dwuarg
@@ -16,6 +16,15 @@ public:
 	//dekonstuktor
 	~OsLiczbowa();
 
+	void setMax(int s) 
+	{
+		osMax = s;
+	}
+
+	void print()
+	{
+		std::cout << osMax << osMin << interval;
+	}
 };
 
 OsLiczbowa::OsLiczbowa() {};
@@ -29,4 +38,8 @@ void auxFun(OsLiczbowa)
 int main()
 {
 
+}
+
+OsLiczbowa::~OsLiczbowa()
+{
 }
