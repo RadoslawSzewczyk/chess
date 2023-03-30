@@ -23,7 +23,7 @@ public:
 	//6 - king
 	//black piece + 10
 
-	int boardINT[8][8];
+	int boardINT[8][8]; 
 	std::vector<piece> boardPiece; //moze cos takiego zamiast tych intow i dodac biale i czarne pola jako klase 
 
 	//czy ja mam tutaj zkonstruowac wszystkie figury?? w semsie kazdy pionek ma byc osobna i ustawiac wszystko po kolei na planszy???
@@ -43,14 +43,14 @@ public:
 	board()
 	//board for game start
 	{
-		for (int i = 0; i < 8; i++)
-		{
-			for (int j = 0; j < 8; j++)
-			{
-				pawn pawn1(i, j, 1);
-				boardINT[i][j] = pawn1.nameINT;
-			}
-		}
+		//for (int i = 0; i < 8; i++)
+		//{
+		//	for (int j = 0; j < 8; j++)
+		//	{
+		//		pawn pawn1(i, j, 1);
+		//		boardINT[i][j] = pawn1.nameINT;
+		//	}
+		//}
 	}
 
 };

@@ -23,6 +23,7 @@ void get_move()
 
 int main()
 {
+
 	board board1;
 	board1.draw_board();
 }
