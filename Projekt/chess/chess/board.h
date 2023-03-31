@@ -10,23 +10,11 @@ public:
 	//isCheck
 	//turn
 	//white, black castle
-	//
+	
 
-	//int board
-	//0 - brak
-	//1 - pawn
-	//2 - rook
-	//3 - bishop
-	//4 - knight
-	//5 - queen
-	//6 - king
-	//black piece + 10
+	std::string boardSTR[8][8];
 
-	std::string boardINT[8][8];
-
-	//piece pawnTab[8];
-
-	std::vector <piece> pieceTab;
+	std::vector <std::shared_ptr<piece>> pieceTab;
 
 	void draw_board();
 

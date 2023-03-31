@@ -6,10 +6,10 @@
 
 void get_consent()
 {
-	int input1;
+	int input;
 	std::cout << "Wanna play chess? \n Press 1 to start\n Press 2 to exit" << std::endl;
-	std::cin >> input1;
-	if (input1 == 2)
+	std::cin >> input;
+	if (input == 2)
 	{
 		exit(0);
 	}
@@ -17,7 +17,14 @@ void get_consent()
 
 void get_move()
 {
-	
+	std::string input;
+	std::cout << "Your move: ";
+	std::cin >> input;
+
+	if (input.length() == 2)
+	{
+		;
+	}
 }
 
 

@@ -8,9 +8,9 @@ void board::draw_board()
 		for (int j = 0; j < 8; j++)
 		{
 			if (tDraw == 1)
-				boardINT[i][j] = "OO";
+				boardSTR[i][j] = "OO";
 			else
-				boardINT[i][j] = "XX";
+				boardSTR[i][j] = "XX";
 			tDraw *= -1;
 		}
 		tDraw *= -1;
@@ -18,7 +18,7 @@ void board::draw_board()
 
 	for (int i = 0; i < pieceTab.size(); i++)
 	{
-		boardINT[pieceTab[i].x][pieceTab[i].y] = pieceTab[i].nameSTR;
+		boardSTR[pieceTab[i].x][pieceTab[i].y] = pieceTab[i].nameSTR;
 	}
 
 	for (int i = 0; i < 8; i++)
@@ -26,9 +26,9 @@ void board::draw_board()
 		for (int j = 0; j < 8; j++)
 		{
 			if (tDraw == 1)
-				std::cout << " " << boardINT[i][j] << " ";
+				std::cout << " " << boardSTR[i][j] << " ";
 			else
-				std::cout << " " << boardINT[i][j] << " ";
+				std::cout << " " << boardSTR[i][j] << " ";
 			tDraw *= -1;
 		}
 		tDraw *= -1;
@@ -41,7 +41,9 @@ board ::board()
 {
 	for (int i = 0; i < 8; i++)
 	{
-		pawn pawn1(0, i, 1);
-		pieceTab.push_back(pawn1);
+		pawn pawn1(0, i, 1), *p;
+;
+
+		pieceTab.push_back(p);
 	}
 }
