@@ -11,6 +11,8 @@ public:
 	bool isBlack;
 	std::string nameSTR;//WP, WB, WR, WN, WQ, WK, BP, BB, BR, BN, BQ, BK
 
+	~piece();
+
 	//virtual void movie_piece() = 0;
 
 };
@@ -18,6 +20,7 @@ public:
 class pawn :public piece 
 {
 public:
+	pawn();
 	pawn(int xC, int yC,bool isBlackC)
 	{
 		x = xC;
