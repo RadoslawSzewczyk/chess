@@ -2,8 +2,8 @@
 
 pawn::pawn(int xC, int yC, bool isBlackC)
 {
-	x = xC;
-	y = yC;
+	x = yC;
+	y = xC;
 	if (isBlackC)
 	{
 		nameSTR = "BP";

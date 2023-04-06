@@ -11,9 +11,8 @@ public:
 
 	std::string nameSTR;//WP, WB, WR, WN, WQ, WK, BP, BB, BR, BN, BQ, BK
 
-	virtual void move_piece(int Nx, int Ny) = 0;
+	virtual void move_piece(int Nx, int Ny) = 0; //a5b3
 
-	~piece();
 };
 
 class pawn :public piece 
@@ -29,4 +28,5 @@ public:
 			std::cout << "Illegal move";
 		y = Nx;
 	}
+	//~pawn();
 };

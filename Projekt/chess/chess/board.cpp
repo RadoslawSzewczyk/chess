@@ -1,5 +1,19 @@
 # include "board.h"
 
+
+board::board()
+//board for game start
+{
+	for (int i = 0; i < 8; i++)
+	{
+		std::shared_ptr<pawn> Bpawn1 (new pawn(i, 7, 1));
+		std::shared_ptr<pawn> Wpawn1(new pawn(i, 0, 0));
+
+		pieceTab.push_back(Bpawn1);
+		pieceTab.push_back(Wpawn1);
+	}
+}
+
 void board::draw_board()
 {
 	int tDraw = 1;
@@ -17,8 +31,8 @@ void board::draw_board()
 	}
 
 	for (int i = 0; i < pieceTab.size(); i++)
-	{
-		boardSTR[pieceTab[i].x][pieceTab[i].y] = pieceTab[i].nameSTR;
+	{;
+		boardSTR[pieceTab[i] -> x][pieceTab[i] -> y] = pieceTab[i] -> nameSTR;
 	}
 
 	for (int i = 0; i < 8; i++)
@@ -33,17 +47,5 @@ void board::draw_board()
 		}
 		tDraw *= -1;
 		std::cout << std::endl;
-	}
-}
-
-board ::board()
-//board for game start
-{
-	for (int i = 0; i < 8; i++)
-	{
-		pawn pawn1(0, i, 1), *p;
-;
-
-		pieceTab.push_back(p);
 	}
 }

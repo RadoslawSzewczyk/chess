@@ -10,7 +10,7 @@ public:
 	//isCheck
 	//turn
 	//white, black castle
-	
+	bool whoToMove = 0; //0 white, 1 black
 
 	std::string boardSTR[8][8];
 

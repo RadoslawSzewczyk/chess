@@ -15,7 +15,7 @@ void get_consent()
 	}
 }
 
-void get_move()
+void get_move(board &board1)
 {
 	std::string input;
 	std::cout << "Your move: ";
