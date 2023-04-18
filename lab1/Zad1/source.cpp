@@ -1,5 +1,5 @@
 # include <iostream>
-
+# include <fstream>
 class OsLiczbowa
 {
 
@@ -15,6 +15,7 @@ public:
 	OsLiczbowa(const OsLiczbowa& OsLiczbowa1);
 	//dekonstuktor
 	~OsLiczbowa();
+
 
 	void setMax(int s) 
 	{
@@ -35,11 +36,17 @@ void auxFun(OsLiczbowa)
 
 }
 
+OsLiczbowa::~OsLiczbowa()
+{
+}
+////////////////////////////////////////////////////////////////////////////////////
+
+//ZAD 2
+
+///////////////////////////////////////////////////////////////////////////////////
+
 int main()
 {
 
 }
 
-OsLiczbowa::~OsLiczbowa()
-{
-}
