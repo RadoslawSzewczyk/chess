@@ -90,10 +90,6 @@ class ZbiorOsi
     int rozmiar;
     OsLiczbowa* osie;
 public:
-    ZbiorOsi(int rozmiar);
-    ZbiorOsi(const ZbiorOsi& zbior);
-    ZbiorOsi(ZbiorOsi&& zbior);
-    ~ZbiorOsi();
 
     ZbiorOsi(int rozmiar) : rozmiar(rozmiar) {
         if (rozmiar > 0) {
