@@ -49,3 +49,15 @@ void board::draw_board()
 		std::cout << std::endl;
 	}
 }
+
+std::string board::whoToMoveF()
+{
+	if (whoToMove)
+	{
+		return whoToMoveSTR = "Black";
+	}
+	else
+	{
+		return whoToMoveSTR = "White";
+	}
+}

@@ -12,11 +12,15 @@ public:
 	//white, black castle
 	bool whoToMove = 0; //0 white, 1 black
 
+	std::string whoToMoveSTR;
+
 	std::string boardSTR[8][8];
 
 	std::vector <std::shared_ptr<piece>> pieceTab;
 
 	void draw_board();
+
+	std::string whoToMoveF();
 
 	board();
 	
