@@ -6,10 +6,11 @@
 
 class ZbiorOsi
 {
-    int rozmiar;
+
     OsLiczbowa* osie;
 public:
-
+    int rozmiar;
+    ZbiorOsi();
     ZbiorOsi(int rozmiar) : rozmiar(rozmiar) {
         if (rozmiar > 0) {
             osie = new OsLiczbowa[rozmiar];
