@@ -1,6 +1,7 @@
 #pragma once
 # include <string>
 # include <iostream>
+
 class piece
 {
 
@@ -11,22 +12,29 @@ public:
 
 	std::string nameSTR;//WP, WB, WR, WN, WQ, WK, BP, BB, BR, BN, BQ, BK
 
-	virtual void move_piece(int Nx, int Ny) = 0; //a5b3
+
+	virtual void move_piece(int wasX,int wasY,int willX,int willY, int moveType, char promotion, std::vector<std::vector<std::string>>& board1) = 0; //a5-b3
 
 };
 
 class pawn :public piece 
 {
-	bool isFirstMove = true;
+
 public:
-	pawn();
+	bool isFirstMove = true;
+
 	pawn(int xC, int yC, bool isBlackC);
 
-	virtual void move_piece(int Nx, int Ny)
+
+	virtual void move_piece(int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::vector<std::vector<std::string>>& board1)
 	{
-		if (x != Nx && Ny != y + 1)
-			std::cout << "Illegal move";
-		y = Nx;
+
+		if (isFirstMove && board1[willX][willY])
+		{
+			;
+		}
+		isFirstMove = false;
 	}
+	
 	//~pawn();
 };

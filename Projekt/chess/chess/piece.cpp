@@ -13,8 +13,3 @@ pawn::pawn(int xC, int yC, bool isBlackC)
 		nameSTR = "WP";
 	}
 }
-
-pawn::pawn()
-{
-}
-

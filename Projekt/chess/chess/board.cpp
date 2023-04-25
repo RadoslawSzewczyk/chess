@@ -50,6 +50,7 @@ void board::draw_board()
 	}
 }
 
+
 std::string board::whoToMoveF()
 {
 	if (whoToMove)
