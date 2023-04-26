@@ -14,12 +14,13 @@ public:
 
 	std::string whoToMoveSTR;
 
-	std::vector<std::vector<std::string>> boardSTR[8][8];
+	std::string boardSTR[8][8];
 
 	std::vector <std::shared_ptr<piece>> pieceTab;
 
 	void draw_board();
 
+	void update_board();
 
 	std::string whoToMoveF();
 
