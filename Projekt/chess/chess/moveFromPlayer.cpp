@@ -11,6 +11,8 @@ void moveFromPlayer::get_move(board& board1)
 loop:
 	std::cin >> input;
 	std::cout << std::endl;
+	if (input == "exit")
+		exit(0);
 	if ((input.length() >= 3 && input.length() < 6) && (int(input[0]) >= 97 && int(input[0]) <= 104 || int(input[0]) == 111) && (int(input[1]) - 48 >= 1 && int(input[1]) - 48 <= 8 || input[1] == '-') && (input[2] == '-' || input[2] == 'x' || input[2] == 'o' || input[2] == 'Q' || input[2] == 'R' || input[2] == 'N' || input[2] == 'B') && (int(input[3]) >= 97 && int(input[3]) <= 104 || int(input[3]) == 111 || input.empty()) && (int(input[4]) - 48 >= 1 && int(input[4]) - 48 <= 8 || input[4] == '-' || input.empty()))
 	{
 		goto exit_loop;
@@ -23,10 +25,11 @@ exit_loop:
 
 	if (input[0] != 'o')
 	{
-		wasX = int(input[0]) - 97;
-		wasY = int(input[1]) - 48;
-		willX = int(input[3]) - 97;
-		willY = int(input[4]) - 48;
+		wasX = 7-(int(input[0]) - 97);//0
+		wasY = (int(input[1]) - 49);//7
+		willX = 7-(int(input[3]) - 97);
+		willY = (int(input[4]) - 49);
+
 
 		if (input[2] == '-')
 			moveType = 0;
