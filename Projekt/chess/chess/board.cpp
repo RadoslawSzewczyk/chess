@@ -6,8 +6,8 @@ board::board()
 {
 	for (int i = 0; i < 8; i++)
 	{
-		std::shared_ptr<pawn> Bpawn1 (new pawn(i, 7, 1));
-		std::shared_ptr<pawn> Wpawn1(new pawn(i, 0, 0));
+		std::shared_ptr<pawn> Bpawn1 (new pawn(i, 6, 1));
+		std::shared_ptr<pawn> Wpawn1(new pawn(i, 1, 0));
 
 		pieceTab.push_back(Bpawn1);
 		pieceTab.push_back(Wpawn1);
@@ -16,19 +16,12 @@ board::board()
 
 void board::draw_board()
 {
-	int tDraw = 1;
-
 	for (int i = 0; i < 8; i++)
 	{
 		for (int j = 0; j < 8; j++)
 		{
-			if (tDraw == 1)
-				std::cout << " " << boardSTR[i][j] << " ";
-			else
-				std::cout << " " << boardSTR[i][j] << " ";
-			tDraw *= -1;
+			std::cout << " " << boardSTR[7 - j][7 - i] << " ";
 		}
-		tDraw *= -1;
 		std::cout << std::endl;
 	}
 }
@@ -53,7 +46,6 @@ void board::update_board()
 
 	for (int i = 0; i < pieceTab.size(); i++)
 	{
-		;
 		boardSTR[pieceTab[i]->x][pieceTab[i]->y] = pieceTab[i]->nameSTR;
 	}
 

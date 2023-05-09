@@ -16,13 +16,15 @@ void get_consent()
 	}
 }
 
-
-int which_piece_to_move(board& board1, moveFromPlayer newmove)
+int which(board& board1, moveFromPlayer newmove)
 {
 	for (int i = 0; i < board1.pieceTab.size(); i++)
 	{
 		if (newmove.wasX == board1.pieceTab[i]->x && newmove.wasY == board1.pieceTab[i]->y)
+		{
 			return i;
+			break;
+		}
 	}
 }
 
@@ -35,11 +37,27 @@ int main()
 	board1.draw_board();
 
 	moveFromPlayer newmove;
+	//exit if u want to leave
+	newmove.get_move(board1);
+	
 
-	std::string whoToMove = board1.whoToMoveF();
+	int whichT = which(board1, newmove);
 
-	newmove.get_move(whoToMove);
+	board1.pieceTab[whichT]->validate_move(board1.whoToMove, board1.pieceTab[whichT] -> colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.moveType,newmove.promotionCH, board1.boardSTR);
 
-	std::cout << board1.pieceTab[which_piece_to_move(board1, newmove)]->validate_move(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY,newmove.moveType, newmove.promotionCH, board1.boardSTR);
+	board1.pieceTab[whichT]->move_piece(board1.whoToMove, board1.pieceTab[whichT]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH, newmove.moveType, board1.boardSTR, board1.pieceTab, whichT);
 
+	board1.update_board();
+	board1.draw_board();
+
+	while (true)
+	{
+		board1.update_board();
+		board1.draw_board();
+
+		moveFromPlayer newmove;
+
+		newmove.get_move(board1);
+
+	}
 }
