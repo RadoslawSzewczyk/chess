@@ -5,6 +5,8 @@
 
 class Wykres : private ZbiorOsi
 {
+    virtual void draw() = 0;
+
     std::string nazwaWykresu;
 
     enum typ
