@@ -1,10 +1,10 @@
 # include "moveFromPlayer.h"
 
-void moveFromPlayer::get_move(board& board1)
+void moveFromPlayer::get_move(std::string whoToMove)
 {
 
 	std::string input;
-	std::cout << board1.whoToMoveF() << " to move" << std::endl;
+	std::cout << whoToMove << " to move" << std::endl;
 	std::cout << "Your move: ";
 
 
@@ -24,9 +24,9 @@ exit_loop:
 	if (input[0] != 'o')
 	{
 		wasX = int(input[0]) - 97;
-		wasY = int(input[1]) - 48;
+		wasY = int(input[1]) - 49;
 		willX = int(input[3]) - 97;
-		willY = int(input[4]) - 48;
+		willY = int(input[4]) - 49;
 
 		if (input[2] == '-')
 			moveType = 0;

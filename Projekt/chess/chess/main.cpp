@@ -17,7 +17,14 @@ void get_consent()
 }
 
 
-
+int which_piece_to_move(board& board1, moveFromPlayer newmove)
+{
+	for (int i = 0; i < board1.pieceTab.size(); i++)
+	{
+		if (newmove.wasX == board1.pieceTab[i]->x && newmove.wasY == board1.pieceTab[i]->y)
+			return i;
+	}
+}
 
 
 int main()
@@ -29,9 +36,10 @@ int main()
 
 	moveFromPlayer newmove;
 
-	newmove.get_move(board1);
+	std::string whoToMove = board1.whoToMoveF();
 
-	std::cout << board1.boardSTR[newmove.wasX][newmove.wasY];
+	newmove.get_move(whoToMove);
 
-	//trzeba zmienić na vecvec bo nie ma dostępu do odpowiednich klass można dodać pustą klasę pola białego i czarnego
+	std::cout << board1.pieceTab[which_piece_to_move(board1, newmove)]->validate_move(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY,newmove.moveType, newmove.promotionCH, board1.boardSTR);
+
 }

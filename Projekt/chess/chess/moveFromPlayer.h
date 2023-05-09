@@ -19,6 +19,6 @@ public:
 
 	char promotionCH = 'E';
 
-	void get_move(board& board1);
+	void get_move(std::string whoToMove);
 	
 };
