@@ -6,7 +6,9 @@
 class Wykres : public ZbiorOsi
 {
 public:
-    void draw();
+    void drawName();
+
+    virtual void draw() = 0;
 
     std::string nazwaWykresu;
 
@@ -35,7 +37,7 @@ public:
 class column : public Wykres
 {
 public:
-    void draw();
+    virtual void draw();
     column(std::string nazwaK,int rozmiarK)
     {
         rozmiar = rozmiarK;
@@ -46,7 +48,7 @@ public:
 class treemap : public Wykres
 {
 public:
-    void draw();
+    virtual void draw();
     treemap(std::string nazwaK, int rozmiarK)
     {
         rozmiar = rozmiarK;

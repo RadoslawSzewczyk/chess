@@ -37,9 +37,12 @@ int main()
     //std::cout << "Po przypisaniu:" << std::endl;
     //std::cout << "os1: " << os1 << std::endl;
     //std::cout << "os2: " << os2 << std::endl;
-    Wykres *pWykres1 = new Wykres;
 
-    auxFun_4_DC(pWykres1);
-    
+    column column1("Kolumna", 10);
+    column* Cptr = &column1;
+
+    auxFun_4(column1);
+
+    auxFun_4_DC(Cptr);
 }
 
