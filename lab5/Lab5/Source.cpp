@@ -46,8 +46,9 @@ int main()
 
     //auxFun_4_DC(Cptr);
 
-    series series1("seria", 10);
-    std::cout << series1;
-
+    //series series1("seria", 10);
+    //std::cout << series1;
+    
+    RealChart real();
 }
 

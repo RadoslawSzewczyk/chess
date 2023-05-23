@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="name.cpp" />
     <ClCompile Include="osliczbowa.cpp" />
     <ClCompile Include="series.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="zbiorosi.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="name.h" />
     <ClInclude Include="osliczbowa.h" />
     <ClInclude Include="series.h" />
     <ClInclude Include="wykres.h" />

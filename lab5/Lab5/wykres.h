@@ -3,15 +3,14 @@
 # include <iostream>
 # include "zbiorosi.h"
 # include "series.h"
-
-class Wykres : public ZbiorOsi
+# include "name.h"
+class Wykres : public ZbiorOsi, public virtual name
 {
 public:
     void drawName();
 
     virtual void draw() = 0;
 
-    std::string nazwaWykresu;
 
     enum typ
     {
@@ -23,7 +22,7 @@ public:
     Wykres(int rozmiarK, std::string nazwaWykresuK, typ typK)
     {
         rozmiar = rozmiarK;
-        nazwaWykresu = nazwaWykresuK;
+        objectName = nazwaWykresuK;
         typ nowyTyp = typK;
 
     };
@@ -42,7 +41,7 @@ public:
     column(std::string nazwaK,int rozmiarK)
     {
         rozmiar = rozmiarK;
-        nazwaWykresu = nazwaK;
+        objectName = nazwaK;
     };
 };
 
@@ -53,7 +52,7 @@ public:
     treemap(std::string nazwaK, int rozmiarK)
     {
         rozmiar = rozmiarK;
-        nazwaWykresu = nazwaK;
+        objectName = nazwaK;
     };
     treemap();
 };

@@ -1,10 +1,10 @@
 #pragma once
 # include <iostream>
-
-class series
+# include "name.h"
+class series: public virtual name
 {
 protected:
-	std::string nazwa;
+
 	int liczbaPunktow;
 
 	int* tablica = new int[liczbaPunktow];
