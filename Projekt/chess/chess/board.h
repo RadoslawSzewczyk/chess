@@ -11,6 +11,8 @@ public:
 	//turn
 	//white, black castle
 	bool whoToMove = 0; //0 white, 1 black
+	bool whiteCastle = 0;
+	bool blackCastle = 0;
 
 	std::string whoToMoveSTR;
 

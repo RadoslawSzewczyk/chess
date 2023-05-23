@@ -25,8 +25,6 @@ int pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, in
 	//black
 	if (whoToMove)
 	{
-		if (board1[wasX][wasY] == "XX" || board1[wasX][wasY] == "OO")
-			isLegal = false;
 
 		if (!(wasY - willY != 1 ^ (isFirstMove && wasY - willY != 2)) || (abs(wasX - willX) == 1 && abs(wasY + willY) == 1))
 			isLegal = false;
@@ -55,10 +53,7 @@ int pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, in
 	//white
 	else
 	{
-		if (board1[wasX][wasY] == "XX" || board1[wasX][wasY] == "OO")
-			isLegal = false;
-
-		if (!(willY - wasY != 1 ^ (isFirstMove && willY - wasY != 2)) || (abs(wasX - willX) == 1 && abs(wasY + willY) == 1))
+		if (!((willY - wasY != 1) ^ (isFirstMove && willY - wasY != 2)) || (abs(wasX - willX) == 1 && abs(wasY - willY) == 1))
 			isLegal = false;
 
 		if (willY - wasY == 1)
@@ -75,12 +70,10 @@ int pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, in
 			moveType = 0;
 		}
 
-		if (abs(wasX - willX) == 1)
-		{
-			if (board1[wasX + 1][wasY + 1][0] != 'B' || board1[wasX - 1][wasY + 1][0] != 'B')
-				isLegal = false;
-			moveType = 1;
-		}
+		if ((board1[willX][willY][0] != 'B' || board1[willX][willY][0] != 'B') && (wasX + 1 == willX || wasX - 1 == willX))
+			isLegal = false;
+		moveType = 1;
+		
 	}
 
 	if (!isLegal)
@@ -95,6 +88,121 @@ int pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, in
 }
 
 void pawn::move_piece(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, char promotion, int moveType, std::string board1[8][8], std::vector<std::shared_ptr<piece>>& pieceTab, int which)
+{
+	if (moveType == 0)
+	{
+		pieceTab[which]->x = willX;
+		pieceTab[which]->y = willY;
+	}
+	else if (moveType == 1)
+	{
+		int t;
+		for (int i = 0; i < pieceTab.size(); i++)
+		{
+			if (pieceTab[i]->x == willX && pieceTab[i]->y == willY)
+				t = i;
+		}
+		pieceTab[which]->x = willX;
+		pieceTab[which]->y = willY;
+		pieceTab.erase(next(begin(pieceTab), +t));
+	}
+}
+
+pawn::~pawn()
+{
+}
+
+king::king(int xC, int yC, bool colourC)
+{
+	x = xC;
+	y = yC;
+	colour = colourC;
+	if (colourC)
+	{
+		nameSTR = "BK";
+	}
+	else
+	{
+		nameSTR = "WK";
+	}
+}
+//int king::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8])
+//{
+//	bool isLegal = true;
+//
+//	if (board1[wasX][wasY] == "OO" || board1[wasX][wasY] == "XX" || whoToMove != pieceColour)
+//		isLegal = false;
+//	if (whoToMove)
+//	{
+//		return 0;
+//	}
+//	return 1;
+//}
+
+bishop::bishop(int xC, int yC, bool colourC)
+{
+	x = xC;
+	y = yC;
+	colour = colourC;
+	if (colourC)
+	{
+		nameSTR = "BB";
+	}
+	else
+	{
+		nameSTR = "WB";
+	}
+}
+
+int bishop::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8])
+{
+	bool isLegal = true;
+
+	if (board1[wasX][wasY] == "OO" || board1[wasX][wasY] == "XX" || whoToMove != pieceColour)
+		isLegal = false;
+	if (whoToMove)
+	{
+		if (wasX < 0 || wasX >= 8 || wasY < 0 || wasY >= 8 || willX < 0 || willX >= 8 || willY < 0 || willY >= 8) {
+			return false;
+		
+
+		std::string piece = board1[wasX][wasY];
+		if (pieceColour && piece[0] != 'W') {
+			return false;
+		}
+		else if (!pieceColour && piece[0] != 'B') {
+			return false;
+		}
+
+		std::string targetPiece = board1[willX][willY];
+		if (targetPiece != "OO" && targetPiece != "XX" && (pieceColour == (targetPiece[0] == 'W'))) {
+			return false;
+		}
+
+		if (abs(wasX - willX) != abs(wasY - willY)) {
+			return false;
+		}
+
+		int dx = (willX > wasX) ? 1 : -1;
+		int dy = (willY > wasY) ? 1 : -1;
+		int x = wasX + dx;
+		int y = wasY + dy;
+		while (x != willX && y != willY) {
+			if (board1[x][y] != "OO" && board1[x][y] != "XX") {
+				return false;
+			}
+			x += dx;
+			y += dy;
+		}
+
+		return true;
+			}
+		
+
+	}
+}
+
+void bishop::move_piece(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, char promotion, int moveType, std::string board1[8][8], std::vector<std::shared_ptr<piece>>& pieceTab, int which)
 {
 	if (moveType == 0)
 	{

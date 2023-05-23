@@ -12,6 +12,8 @@ board::board()
 		pieceTab.push_back(Bpawn1);
 		pieceTab.push_back(Wpawn1);
 	}
+	std::shared_ptr<bishop> Bbishop(new bishop(3, 7, 1));
+	pieceTab.push_back(Bbishop);
 }
 
 void board::draw_board()

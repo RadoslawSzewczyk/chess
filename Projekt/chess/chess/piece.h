@@ -26,10 +26,29 @@ public:
 	bool isFirstMove = true;
 
 	pawn(int xC, int yC, bool colourC);
-	//wasss and clolur usseless
+
 	virtual int validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8]);
 	
 	virtual void move_piece(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, char promotion,int moveType, std::string board1[8][8], std::vector <std::shared_ptr<piece>>& pieceTab, int which);
 
+	~pawn();
+};
+
+class king : public piece
+{
+	king(int xC, int yC, bool colourC);
+	//virtual int validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8]);
+
+	//virtual void move_piece(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, char promotion, int moveType, std::string board1[8][8], std::vector <std::shared_ptr<piece>>& pieceTab, int which);
+
+};
+
+class bishop : public piece
+{
+public:
+	bishop(int xC, int yC, bool colourC);
+	virtual int validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8]);
+
+	virtual void move_piece(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, char promotion, int moveType, std::string board1[8][8], std::vector <std::shared_ptr<piece>>& pieceTab, int which);
 
 };
