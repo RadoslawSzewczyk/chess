@@ -32,17 +32,21 @@ int main()
 	{
 		board1.update_board();
 		board1.draw_board();
-	loop:
 		moveFromPlayer newmove;
+		bool pom = 0;
+		do
+		{
+
+			newmove.get_move(board1);
+
+			int whichT = which(board1, newmove);
+
+			pom = board1.pieceTab[whichT]->validate_move(board1.whoToMove, board1.pieceTab[whichT]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.moveType, newmove.promotionCH, board1.boardSTR, whichT);
 
 
-		newmove.get_move(board1);
-		int whichT = which(board1, newmove);
+			board1.pieceTab[whichT]->move_piece(board1.whoToMove, board1.pieceTab[whichT]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH, newmove.moveType, board1.boardSTR, board1.pieceTab, whichT);
 
-		if (board1.pieceTab[whichT]->validate_move(board1.whoToMove, board1.pieceTab[whichT]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.moveType, newmove.promotionCH, board1.boardSTR) == 1)
-			goto loop;
-
-		board1.pieceTab[whichT]->move_piece(board1.whoToMove, board1.pieceTab[whichT]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH, newmove.moveType, board1.boardSTR, board1.pieceTab, whichT);
+		} while (pom);
 		
 		board1.whoToMove = !board1.whoToMove;
 		system("cls");

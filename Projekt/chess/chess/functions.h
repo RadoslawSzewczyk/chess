@@ -8,7 +8,9 @@ void get_consent()
 	{
 		exit(0);
 	}
+	system("cls");
 }
+
 int which(board& board1, moveFromPlayer newmove)
 {
 	for (int i = 0; i < board1.pieceTab.size(); i++)
@@ -19,5 +21,6 @@ int which(board& board1, moveFromPlayer newmove)
 			break;
 		}
 	}
+	return 99; //error code
 }
 
