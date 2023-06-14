@@ -2,6 +2,8 @@
 # include <iostream>
 # include <string>
 # include "board.h"
+# include <fstream>
+
 
 class moveFromPlayer
 {
@@ -19,6 +21,9 @@ public:
 
 	char promotionCH = 'E';
 
-	void get_move(std::string whoToMove);
+	void get_move(board& board1);
+
+	void savePositionToFile(board& board1, std::string file);
+
 	
 };

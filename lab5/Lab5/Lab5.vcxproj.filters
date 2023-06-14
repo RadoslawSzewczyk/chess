@@ -15,45 +15,39 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="king.cpp">
+    <ClCompile Include="wykres.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="board.cpp">
+    <ClCompile Include="zbiorosi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="moveFromPlayer.cpp">
+    <ClCompile Include="osliczbowa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pawn.cpp">
+    <ClCompile Include="series.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="bishop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="rook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="queen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="knight.cpp">
+    <ClCompile Include="name.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="piece.h">
+    <ClInclude Include="osliczbowa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="board.h">
+    <ClInclude Include="wykres.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="moveFromPlayer.h">
+    <ClInclude Include="zbiorosi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="functions.h">
+    <ClInclude Include="series.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="name.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

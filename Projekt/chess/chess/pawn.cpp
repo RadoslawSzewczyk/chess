@@ -15,50 +15,55 @@ pawn::pawn(int xC, int yC, bool colourC)
 	}
 }
 
-int pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8])
+bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int whichT)
 {
 	bool isLegal = true;
+
+	if (whichT == 99)
+	{
+		isLegal = false;
+	}
+
+	if (willX > 8 || willX < 1 || willY > 8 || willY < 1)
+		isLegal = false;
 
 	if (board1[wasX][wasY] == "OO" || board1[wasX][wasY] == "XX" || whoToMove != pieceColour)
 		isLegal = false;
 
+
 	//black
 	if (whoToMove)
 	{
-		if (board1[wasX][wasY] == "XX" || board1[wasX][wasY] == "OO")
-			isLegal = false;
 
-		if (!(wasY - willY != 1 ^ (isFirstMove && wasY - willY != 2)) || (abs(wasX - willX) == 1 && abs(wasY + willY) == 1))
+		if (!((wasY - willY != 1) ^ (isFirstMove && wasY - willY != 2)) || (abs(willX - wasX) == 1 && abs(wasY - willY) == 1))
 			isLegal = false;
 
 		if (wasY - willY == 1)
 		{
 			if (wasX != willX && (board1[wasX][wasY - 1] != "OO" ^ board1[wasX][wasY - 1] != "XX"))
+			{
 				isLegal = false;
-			moveType = 0;
+				moveType = 0;
+			}
 		}
 
-		if (willY - wasY == 2)
+		if (wasY - willY == 2)
 		{
 			if (wasX != willX && (board1[wasX][wasY - 2] != "OO" ^ board1[wasX][wasY - 2] != "XX") && (board1[wasX][wasY - 1] != "OO" ^ board1[wasX][wasY - 1] != "XX"))
 				isLegal = false;
 			moveType = 0;
 		}
 
-		if (abs(wasX - willX) == 1)
+		if ((board1[willX][willY][0] == 'W' || board1[willX][willY][0] == 'W') && (wasX + 1 == willX || wasX - 1 == willX))
 		{
-			if (board1[wasX + 1][wasY - 1][0] != 'W' || board1[wasX - 1][wasY - 1][0] != 'W')
-				isLegal = false;
+			isLegal = true;
 			moveType = 1;
 		}
 	}
 	//white
 	else
 	{
-		if (board1[wasX][wasY] == "XX" || board1[wasX][wasY] == "OO")
-			isLegal = false;
-
-		if (!(willY - wasY != 1 ^ (isFirstMove && willY - wasY != 2)) || (abs(wasX - willX) == 1 && abs(wasY + willY) == 1))
+		if (!((willY - wasY != 1) ^ (isFirstMove && willY - wasY != 2)) || (abs(wasX - willX) == 1 && abs(wasY - willY) == 1))
 			isLegal = false;
 
 		if (willY - wasY == 1)
@@ -75,13 +80,13 @@ int pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, in
 			moveType = 0;
 		}
 
-		if (abs(wasX - willX) == 1)
+		if ((board1[willX][willY][0] == 'B' || board1[willX][willY][0] == 'B') && (wasX + 1 == willX || wasX - 1 == willX))
 		{
-			if (board1[wasX + 1][wasY + 1][0] != 'B' || board1[wasX - 1][wasY + 1][0] != 'B')
-				isLegal = false;
+			isLegal = true;
 			moveType = 1;
 		}
 	}
+
 
 	if (!isLegal)
 	{
@@ -113,4 +118,8 @@ void pawn::move_piece(bool whoToMove, bool pieceColour, int wasX, int wasY, int 
 		pieceTab[which]->y = willY;
 		pieceTab.erase(next(begin(pieceTab), +t));
 	}
+}
+
+pawn::~pawn()
+{
 }

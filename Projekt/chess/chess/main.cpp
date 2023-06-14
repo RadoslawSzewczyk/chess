@@ -4,60 +4,63 @@
 # include <string>
 # include "moveFromPlayer.h"
 # include "piece.h"
+# include <fstream>
+# include <sstream>
+# include "functions.h"
 
-void get_consent()
-{
-	int input;
-	std::cout << "Wanna play chess? \n Press 1 to start\n Press 2 to exit" << std::endl;
-	std::cin >> input;
-	if (input == 2)
-	{
-		exit(0);
-	}
-}
 
-int which(board& board1, moveFromPlayer newmove)
-{
-	for (int i = 0; i < board1.pieceTab.size(); i++)
-	{
-		if (newmove.wasX == board1.pieceTab[i]->x && newmove.wasY == board1.pieceTab[i]->y)
-		{
-			return i;
-			break;
-		}
-	}
-}
-
+//while (file1)
+//{
+//	file1 << i;
+//	std::stringstream sstr(i);
+//	std::vector<std::string> v;
+//	while (sstr.good())
+//	{
+//		std::string substr;
+//		getline(sstr, substr, ';');
+//		v.push_back(substr);
+//	}
+//}
 
 int main()
 {
+
+	get_consent();
 	board board1;
 
-	board1.update_board();
-	board1.draw_board();
-
-	moveFromPlayer newmove;
-	//exit if u want to leave
-	newmove.get_move(board1);
-	
-
-	int whichT = which(board1, newmove);
-
-	board1.pieceTab[whichT]->validate_move(board1.whoToMove, board1.pieceTab[whichT] -> colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.moveType,newmove.promotionCH, board1.boardSTR);
-
-	board1.pieceTab[whichT]->move_piece(board1.whoToMove, board1.pieceTab[whichT]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH, newmove.moveType, board1.boardSTR, board1.pieceTab, whichT);
-
-	board1.update_board();
-	board1.draw_board();
 
 	while (true)
 	{
 		board1.update_board();
 		board1.draw_board();
-
 		moveFromPlayer newmove;
+		bool temp = 0;
+		bool temp2 = 0;
+		int temp3 = 0;
+		do
+		{
 
-		newmove.get_move(board1);
+			newmove.get_move(board1);
 
+			int whichT = which(board1, newmove);
+			temp3 = whichT;
+			if (whichT == 99) //error code check
+			{
+				temp2 = 1;
+				break;
+			}
+			
+
+			temp = board1.pieceTab[whichT]->validate_move(board1.whoToMove, board1.pieceTab[whichT]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.moveType, newmove.promotionCH, board1.boardSTR, whichT);
+
+
+			
+		} while (temp);
+
+		board1.pieceTab[temp3]->move_piece(board1.whoToMove, board1.pieceTab[temp3]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH, newmove.moveType, board1.boardSTR, board1.pieceTab, temp3);
+
+		if(temp2 == 0)
+			board1.whoToMove = !board1.whoToMove;
+		system("cls");
 	}
 }
