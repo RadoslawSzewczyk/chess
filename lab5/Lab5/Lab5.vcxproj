@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{13c47297-fe19-4460-8031-88476131718e}</ProjectGuid>
-    <RootNamespace>chess</RootNamespace>
+    <ProjectGuid>{2c9a0dd8-c7ac-4e01-b2e7-a599e8610efb}</ProjectGuid>
+    <RootNamespace>Lab5</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -70,6 +70,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -127,21 +139,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bishop.cpp" />
-    <ClCompile Include="board.cpp" />
-    <ClCompile Include="knight.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="moveFromPlayer.cpp" />
-    <ClCompile Include="pawn.cpp" />
-    <ClCompile Include="king.cpp" />
-    <ClCompile Include="queen.cpp" />
-    <ClCompile Include="rook.cpp" />
+    <ClCompile Include="name.cpp" />
+    <ClCompile Include="osliczbowa.cpp" />
+    <ClCompile Include="series.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="wykres.cpp" />
+    <ClCompile Include="zbiorosi.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="board.h" />
-    <ClInclude Include="functions.h" />
-    <ClInclude Include="moveFromPlayer.h" />
-    <ClInclude Include="piece.h" />
+    <ClInclude Include="name.h" />
+    <ClInclude Include="osliczbowa.h" />
+    <ClInclude Include="series.h" />
+    <ClInclude Include="wykres.h" />
+    <ClInclude Include="zbiorosi.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

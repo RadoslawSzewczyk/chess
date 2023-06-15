@@ -21,21 +21,21 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{13c47297-fe19-4460-8031-88476131718e}</ProjectGuid>
-    <RootNamespace>chess</RootNamespace>
+    <ProjectGuid>{0d7bc5b3-7af5-43e9-9c17-d9da17178c75}</ProjectGuid>
+    <RootNamespace>Lab4</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -48,7 +48,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -127,21 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bishop.cpp" />
-    <ClCompile Include="board.cpp" />
-    <ClCompile Include="knight.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="moveFromPlayer.cpp" />
-    <ClCompile Include="pawn.cpp" />
-    <ClCompile Include="king.cpp" />
-    <ClCompile Include="queen.cpp" />
-    <ClCompile Include="rook.cpp" />
+    <ClCompile Include="..\..\..\lab3\Lab3\Lab3\osliczbowa.cpp" />
+    <ClCompile Include="..\..\..\lab3\Lab3\Lab3\Source.cpp" />
+    <ClCompile Include="..\..\..\lab3\Lab3\Lab3\zbiorosi.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="board.h" />
-    <ClInclude Include="functions.h" />
-    <ClInclude Include="moveFromPlayer.h" />
-    <ClInclude Include="piece.h" />
+    <ClInclude Include="..\..\..\lab3\Lab3\Lab3\osliczbowa.h" />
+    <ClInclude Include="..\..\..\lab3\Lab3\Lab3\wykres.h" />
+    <ClInclude Include="..\..\..\lab3\Lab3\Lab3\zbiorosi.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

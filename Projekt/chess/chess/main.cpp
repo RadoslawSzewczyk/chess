@@ -9,42 +9,48 @@
 # include "functions.h"
 
 
-//while (file1)
-//{
-//	file1 << i;
-//	std::stringstream sstr(i);
-//	std::vector<std::string> v;
-//	while (sstr.good())
-//	{
-//		std::string substr;
-//		getline(sstr, substr, ';');
-//		v.push_back(substr);
-//	}
-//}
-
 int main()
 {
 
 	get_consent();
 	board board1;
 
+
 	while (true)
 	{
 		board1.update_board();
 		board1.draw_board();
-	loop:
 		moveFromPlayer newmove;
+		bool temp = 0;
+		bool temp2 = 0;
+		int temp3 = 0;
+		do
+		{
+
+			newmove.get_move(board1);
+
+			int whichT = which(board1, newmove);
+
+			temp3 = whichT;
+
+			if (whichT == 99) //error code check
+			{
+				temp2 = 1;
+				break;
+			}
+			
+
+			temp = board1.pieceTab[whichT]->validate_move(board1.whoToMove, board1.pieceTab[whichT]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.moveType, newmove.promotionCH, board1.boardSTR, whichT);
 
 
-		newmove.get_move(board1);
-		int whichT = which(board1, newmove);
+			
+		} while (temp);
 
-		if (board1.pieceTab[whichT]->validate_move(board1.whoToMove, board1.pieceTab[whichT]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.moveType, newmove.promotionCH, board1.boardSTR) == 1)
-			goto loop;
+		board1.pieceTab[temp3]->move_piece(board1.whoToMove, board1.pieceTab[temp3]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH, newmove.moveType, board1.boardSTR, board1.pieceTab, temp3);
 
-		board1.pieceTab[whichT]->move_piece(board1.whoToMove, board1.pieceTab[whichT]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH, newmove.moveType, board1.boardSTR, board1.pieceTab, whichT);
-		
-		board1.whoToMove = !board1.whoToMove;
+		if(temp2 == 0)
+			board1.whoToMove = !board1.whoToMove;
 		system("cls");
+		
 	}
 }

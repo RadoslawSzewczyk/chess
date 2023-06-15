@@ -3,6 +3,7 @@
 # include "osliczbowa.h"
 # include "zbiorosi.h"
 # include "wykres.h"
+# include "series.h"
 
 void auxFun_4(Wykres &wykres1)
 {
@@ -37,13 +38,17 @@ int main()
     //std::cout << "Po przypisaniu:" << std::endl;
     //std::cout << "os1: " << os1 << std::endl;
     //std::cout << "os2: " << os2 << std::endl;
+    //lab4
+    //column column1("Kolumna", 10);
+    //column* Cptr = &column1;
 
-    column column1("Kolumna", 10);
-    column* Cptr = &column1;
+    //auxFun_4(column1);
 
-    auxFun_4(column1);
+    //auxFun_4_DC(Cptr);
 
-    auxFun_4_DC(Cptr);
-    std::cout << "kkkkkkkk";
+    //series series1("seria", 10);
+    //std::cout << series1;
+    
+    RealChart real();
 }
 

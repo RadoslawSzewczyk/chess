@@ -15,45 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="..\..\..\lab3\Lab3\Lab3\osliczbowa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="king.cpp">
+    <ClCompile Include="..\..\..\lab3\Lab3\Lab3\Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="board.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="moveFromPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pawn.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bishop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="rook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="queen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="knight.cpp">
+    <ClCompile Include="..\..\..\lab3\Lab3\Lab3\zbiorosi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="piece.h">
+    <ClInclude Include="..\..\..\lab3\Lab3\Lab3\wykres.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="board.h">
+    <ClInclude Include="..\..\..\lab3\Lab3\Lab3\zbiorosi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="moveFromPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="functions.h">
+    <ClInclude Include="..\..\..\lab3\Lab3\Lab3\osliczbowa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

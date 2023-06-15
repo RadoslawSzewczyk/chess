@@ -12,8 +12,55 @@ board::board()
 		pieceTab.push_back(Bpawn1);
 		pieceTab.push_back(Wpawn1);
 	}
-	std::shared_ptr<bishop> Bbishop(new bishop(3, 7, 1));
+	//black
+	std::shared_ptr<bishop> Bbishop(new bishop(2, 7, 1));
 	pieceTab.push_back(Bbishop);
+
+	std::shared_ptr<bishop> Bbishop2(new bishop(5, 7, 1));
+	pieceTab.push_back(Bbishop2);
+
+	std::shared_ptr<rook> Brook(new rook(7, 7, 1));
+	pieceTab.push_back(Brook);
+
+	std::shared_ptr<rook> Brook2(new rook(0, 7, 1));
+	pieceTab.push_back(Brook2);
+	
+	std::shared_ptr<queen> Bqueen(new queen(3, 7, 1));
+	pieceTab.push_back(Bqueen);
+
+	std::shared_ptr<knight> Bknight(new knight(1, 7, 1));
+	pieceTab.push_back(Bknight);
+
+	std::shared_ptr<knight> Bknight2(new knight(6, 7, 1));
+	pieceTab.push_back(Bknight2);
+
+	std::shared_ptr<king> Bking(new king(4, 7, 1));
+	pieceTab.push_back(Bking);
+
+	//white
+	std::shared_ptr<bishop> Wbishop(new bishop(2, 0, 0));
+	pieceTab.push_back(Wbishop);
+
+	std::shared_ptr<bishop> Wbishop2(new bishop(5, 0, 0));
+	pieceTab.push_back(Wbishop2);
+
+	std::shared_ptr<rook> Wrook(new rook(7, 0, 0));
+	pieceTab.push_back(Wrook);
+
+	std::shared_ptr<rook> Wrook2(new rook(0, 0, 0));
+	pieceTab.push_back(Wrook2);
+
+	std::shared_ptr<queen> Wqueen(new queen(3, 0, 0));
+	pieceTab.push_back(Wqueen);
+
+	std::shared_ptr<knight> Wknight(new knight(1, 0, 0));
+	pieceTab.push_back(Wknight);
+
+	std::shared_ptr<knight> Wknight2(new knight(6, 0, 0));
+	pieceTab.push_back(Wknight2);
+
+	std::shared_ptr<king> Wking(new king(4, 0, 0));
+	pieceTab.push_back(Wking);
 }
 
 void board::draw_board()
