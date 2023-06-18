@@ -6,10 +6,7 @@
 class board
 {
 public:
-	//TODO
-	//isCheck
-	//turn
-	//white, black castle
+
 	bool whoToMove = 0; //0 white, 1 black
 	bool whiteCastle = 0;
 	bool blackCastle = 0;
@@ -25,6 +22,12 @@ public:
 	void update_board();
 
 	std::string whoToMoveF();
+
+	bool isKingInCheck();
+
+	bool isCheckmate();
+
+	int pieceCount();
 
 	board();
 	

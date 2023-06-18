@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="bishop.cpp" />
     <ClCompile Include="board.cpp" />
+    <ClCompile Include="chessDatabase.cpp" />
     <ClCompile Include="knight.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="moveFromPlayer.cpp" />
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="board.h" />
+    <ClInclude Include="chessDatabase.h" />
     <ClInclude Include="functions.h" />
     <ClInclude Include="moveFromPlayer.h" />
     <ClInclude Include="piece.h" />

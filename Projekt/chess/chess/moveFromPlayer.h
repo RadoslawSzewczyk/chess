@@ -3,13 +3,12 @@
 # include <string>
 # include "board.h"
 # include <fstream>
-
+# include "chessDatabase.h"
 
 class moveFromPlayer
 {
 public:
 	//a5-a6
-	//a5xa6
 	//o-o
 	//o-o-o
 	//a7Qa8
@@ -21,9 +20,7 @@ public:
 
 	char promotionCH = 'E';
 
-	void get_move(board& board1);
-
-	void savePositionToFile(board& board1, std::string file);
+	void get_move(board& board1, ChessDatabase database);
 
 	
 };

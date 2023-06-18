@@ -1,6 +1,11 @@
 # include "piece.h"
 
 
+char rook::typeCharF()
+{
+	return typeChar = 'R';
+}
+
 rook::rook(int xC, int yC, bool colourC)
 {
 	x = xC;
@@ -18,6 +23,11 @@ rook::rook(int xC, int yC, bool colourC)
 
 bool rook::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int whichT)
 {
+	char whoToMoveC;
+	if (whoToMove)
+		whoToMoveC = 'B';
+	else
+		whoToMoveC = 'W';
 	bool isLegal = true;
 
 
@@ -27,7 +37,7 @@ bool rook::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 	if (willX > 8 || willX < 1 || willY > 8 || willY < 1)
 		isLegal = false;
 
-	if (board1[wasX][wasY] == "OO" || board1[wasX][wasY] == "XX" || whoToMove != pieceColour)
+	if (board1[wasX][wasY] == "OO" || board1[wasX][wasY] == "XX" || whoToMove != pieceColour || board1[willX][willY][0] == whoToMoveC)
 		isLegal = false;
 
 
@@ -70,27 +80,6 @@ bool rook::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 	}
 	else
 		return 0;
-}
-
-void rook::move_piece(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, char promotion, int moveType, std::string board1[8][8], std::vector<std::shared_ptr<piece>>& pieceTab, int which)
-{
-	if (moveType == 0)
-	{
-		pieceTab[which]->x = willX;
-		pieceTab[which]->y = willY;
-	}
-	else if (moveType == 1)
-	{
-		int t;
-		for (int i = 0; i < pieceTab.size(); i++)
-		{
-			if (pieceTab[i]->x == willX && pieceTab[i]->y == willY)
-				t = i;
-		}
-		pieceTab[which]->x = willX;
-		pieceTab[which]->y = willY;
-		pieceTab.erase(next(begin(pieceTab), +t));
-	}
 }
 
 rook::~rook()

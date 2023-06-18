@@ -1,5 +1,5 @@
 # include "board.h"
-
+# include <fstream>
 
 board::board()
 //board for game start
@@ -25,7 +25,7 @@ board::board()
 	std::shared_ptr<rook> Brook2(new rook(0, 7, 1));
 	pieceTab.push_back(Brook2);
 	
-	std::shared_ptr<queen> Bqueen(new queen(3, 7, 1));
+	std::shared_ptr<queen> Bqueen(new queen(4, 7, 1));
 	pieceTab.push_back(Bqueen);
 
 	std::shared_ptr<knight> Bknight(new knight(1, 7, 1));
@@ -34,7 +34,7 @@ board::board()
 	std::shared_ptr<knight> Bknight2(new knight(6, 7, 1));
 	pieceTab.push_back(Bknight2);
 
-	std::shared_ptr<king> Bking(new king(4, 7, 1));
+	std::shared_ptr<king> Bking(new king(3, 7, 1));
 	pieceTab.push_back(Bking);
 
 	//white
@@ -50,7 +50,7 @@ board::board()
 	std::shared_ptr<rook> Wrook2(new rook(0, 0, 0));
 	pieceTab.push_back(Wrook2);
 
-	std::shared_ptr<queen> Wqueen(new queen(3, 0, 0));
+	std::shared_ptr<queen> Wqueen(new queen(4, 0, 0));
 	pieceTab.push_back(Wqueen);
 
 	std::shared_ptr<knight> Wknight(new knight(1, 0, 0));
@@ -59,7 +59,7 @@ board::board()
 	std::shared_ptr<knight> Wknight2(new knight(6, 0, 0));
 	pieceTab.push_back(Wknight2);
 
-	std::shared_ptr<king> Wking(new king(4, 0, 0));
+	std::shared_ptr<king> Wking(new king(3, 0, 0));
 	pieceTab.push_back(Wking);
 }
 
@@ -100,6 +100,10 @@ void board::update_board()
 
 }
 
+int board::pieceCount()
+{
+	return pieceTab.size();
+}
 
 std::string board::whoToMoveF()
 {
@@ -111,4 +115,59 @@ std::string board::whoToMoveF()
 	{
 		return whoToMoveSTR = "White";
 	}
+}
+
+bool board::isKingInCheck()
+{
+	int kingX = -1;
+	int kingY = -1;
+
+	for (int i = 0; i < pieceCount(); i++)
+	{
+		if (pieceTab[i]->nameSTR[1] == 'K' && pieceTab[i]->nameSTR[0] == (whoToMove ? 'B' : 'W'))
+		{
+			kingX = pieceTab[i]->x;
+			kingY = pieceTab[i]->y;
+			break;
+		}
+	}
+
+	
+	for (int i = 0; i < pieceCount(); i++)
+	{
+		if (!pieceTab[i]->validate_move(whoToMove, pieceTab[i]->colour, pieceTab[i]->x, pieceTab[i]->y, kingX, kingY, 0, 'E', boardSTR, i))
+		{
+			return true;
+		}
+
+	}
+
+	return false;
+}
+
+bool board::isCheckmate()
+{
+	if (!isKingInCheck())
+	{
+		return false;
+	}
+
+	for (int i = 0; i < pieceCount(); i++)
+	{
+		if (pieceTab[i]->colour != whoToMove)
+		{
+			for (int x = 0; x < 8; x++)
+			{
+				for (int y = 0; y < 8; y++)
+				{
+					if (pieceTab[i]->validate_move(whoToMove, pieceTab[i]->colour, pieceTab[i]->x, pieceTab[i]->y, x, y, 0, ' ', boardSTR, i))
+					{
+						return false;
+					}
+				}
+			}
+		}
+	}
+
+	return true;
 }

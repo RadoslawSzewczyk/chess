@@ -1,18 +1,21 @@
+#pragma warning(disable : 4996)
 # include "moveFromPlayer.h"
+# include <chrono>
+#include <iomanip>
+# include <sstream>
 
-void moveFromPlayer::savePositionToFile(board & board1, std::string file)
+std::string getCurrentDateTime()
 {
-	std::ofstream file1(file);
+	const auto now = std::chrono::system_clock::now();
+	const std::time_t t_c = std::chrono::system_clock::to_time_t(now);
 
-	file1 << board1.whoToMove << ";" << board1.whiteCastle << ";" << board1.blackCastle << ";" << std::endl;
-	for (int i = 0; i < board1.pieceTab.size(); i++)
-	{
-		file1 << board1.pieceTab[i]->nameSTR << ";" << board1.pieceTab[i]->x << ";" << board1.pieceTab[i]->y << ";" << board1.pieceTab[i]->colour << std::endl;
-	}
+	std::stringstream ss;
+	ss << std::put_time(std::localtime(&t_c), "%Y-%m-%d %H:%M:%S");
 
+	return ss.str();
 }
 
-void moveFromPlayer::get_move(board& board1)
+void moveFromPlayer::get_move(board& board1, ChessDatabase database)
 {
 
 	std::string input;
@@ -24,19 +27,42 @@ loop:
 	std::cin >> input;
 	std::cout << std::endl;
 	if (input == "exit")
+	{
+		database.savePositionsToFile();
 		exit(0);
+	}
+
 
 	if (input == "save")
 	{
-		std::string inputSave;
-		std::cout << "Name your save file:" << std::endl;
 
-		std::cin >> inputSave;
+		std::string inputName;
+
+		std::cout << "Name your position:" << std::endl;
+
+		std::cin >> inputName;
+
 		std::cout << std::endl;
-		
-		savePositionToFile(board1, inputSave);
-		exit(0);
+
+		ChessPosition position;
+
+		std::string dateTime;
+		std::stringstream ss;
+		ss << getCurrentDateTime();
+		dateTime = ss.str();
+
+		position.name = inputName;
+		position.date = dateTime;
+		position.pieceTab = board1.pieceTab;
+		position.whoToMove = board1.whoToMove;
+		position.blackCastle = board1.blackCastle;
+		position.whiteCastle = board1.whiteCastle;
+
+		database.addPosition(position);
+		std::cout << "Position added " << std::endl;
 	}
+
+
 	if ((input.length() >= 3 && input.length() < 6) && (int(input[0]) >= 97 && int(input[0]) <= 104 || int(input[0]) == 111) && (int(input[1]) - 48 >= 1 && int(input[1]) - 48 <= 8 || input[1] == '-') && (input[2] == '-' || input[2] == 'x' || input[2] == 'o' || input[2] == 'Q' || input[2] == 'R' || input[2] == 'N' || input[2] == 'B') && (int(input[3]) >= 97 && int(input[3]) <= 104 || int(input[3]) == 111 || input.empty()) && (int(input[4]) - 48 >= 1 && int(input[4]) - 48 <= 8 || input[4] == '-' || input.empty()))
 	{
 		goto exit_loop;

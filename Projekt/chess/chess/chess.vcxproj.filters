@@ -42,6 +42,9 @@
     <ClCompile Include="knight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="chessDatabase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="piece.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="chessDatabase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

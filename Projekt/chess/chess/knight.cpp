@@ -1,5 +1,10 @@
 # include "piece.h"
 
+char knight::typeCharF()
+{
+    return typeChar = 'N';
+}
+
 knight::knight(int xC, int yC, bool colourC)
 {
     x = xC;
@@ -19,12 +24,17 @@ knight::knight(int xC, int yC, bool colourC)
 
 bool knight::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int whichT)
 {
+    char whoToMoveC;
+    if (whoToMove)
+        whoToMoveC = 'B';
+    else
+        whoToMoveC = 'W';
     bool isLegal = true;
     if (whichT == 99)
         isLegal = false;
     if (willX > 8 || willX < 1 || willY > 8 || willY < 1)
         isLegal = false;
-    if (board1[wasX][wasY] == "OO" || board1[wasX][wasY] == "XX" || whoToMove != pieceColour)
+    if (board1[wasX][wasY] == "OO" || board1[wasX][wasY] == "XX" || whoToMove != pieceColour || board1[willX][willY][0] == whoToMoveC)
         isLegal = false;
 
     std::string targetPiece = board1[willX][willY];
@@ -53,26 +63,6 @@ bool knight::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY,
         return 0;
 }
 
-void knight::move_piece(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, char promotion, int moveType, std::string board1[8][8], std::vector<std::shared_ptr<piece>>& pieceTab, int which)
-{
-    if (moveType == 0)
-    {
-        pieceTab[which]->x = willX;
-        pieceTab[which]->y = willY;
-    }
-    else if (moveType == 1)
-    {
-        int t;
-        for (int i = 0; i < pieceTab.size(); i++)
-        {
-            if (pieceTab[i]->x == willX && pieceTab[i]->y == willY)
-                t = i;
-        }
-        pieceTab[which]->x = willX;
-        pieceTab[which]->y = willY;
-        pieceTab.erase(next(begin(pieceTab), +t));
-    }
-}
 
 knight::~knight()
 {
