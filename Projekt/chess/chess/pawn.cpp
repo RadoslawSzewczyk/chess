@@ -39,7 +39,10 @@ bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 		isLegal = false;
 
 
-	if (abs(wasX - willX) >= 2)
+	if (abs(wasX - willX) > 1)
+		isLegal = false;
+
+	if (abs(wasY - willY) > 2)
 		isLegal = false;
 
 	if (board1[wasX][wasY] == "OO" || board1[wasX][wasY] == "XX" || whoToMove != pieceColour || board1[willX][willY][0] == whoToMoveC)
@@ -52,10 +55,7 @@ bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 	if (whoToMove)
 	{
 
-		if (!((wasY - willY != 1) ^ (isFirstMove && wasY - willY != 2)) || (abs(willX - wasX) == 1 && abs(wasY - willY) == 1))
-			isLegal = false;
-
-		else if (wasY - willY == 1)
+		if (willY - wasY == 1 && wasX == willX)
 		{
 			if (wasX != willX && (board1[wasX][wasY - 1] != "OO" ^ board1[wasX][wasY - 1] != "XX"))
 			{
@@ -64,43 +64,40 @@ bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 			}
 		}
 
-		else if (wasY - willY == 2)
+		else if (willY - wasY == 2 && isFirstMove && wasX == willX)
 		{
 			if (wasX != willX && (board1[wasX][wasY - 2] != "OO" ^ board1[wasX][wasY - 2] != "XX") && (board1[wasX][wasY - 1] != "OO" ^ board1[wasX][wasY - 1] != "XX"))
 				isLegal = false;
 			moveType = 0;
 		}
 	
-		else if (abs(wasX - willX) == 1)
+		else if (abs(wasX - willX) == 1 && willY - wasY == -1)
 		{
-			if (board1[willX][willY][0] != 'W' && willY - wasY != -1)
-				isLegal = true;
+			if (board1[willX][willY][0] == 'B' && willY - wasY != -1)
+				isLegal = false;
 		}
 	}
 	//white
 	else
 	{
-		if (!((willY - wasY != 1) ^ (isFirstMove && willY - wasY != 2)) || (abs(wasX - willX) == 1 && abs(wasY - willY) == 1))
-			isLegal = false;
-
-		else if (willY - wasY == 1)
+		if (willY - wasY == 1 && wasX == willX)
 		{
 			if (wasX != willX && (board1[wasX][wasY + 1] != "OO" ^ board1[wasX][wasY + 1] != "XX"))
 				isLegal = false;
 			moveType = 0;
 		}
 
-		else if (willY - wasY == 2)
+		else if (willY - wasY == 2 && isFirstMove && wasX == willX)
 		{
 			if (wasX != willX && (board1[wasX][wasY + 2] != "OO" ^ board1[wasX][wasY + 2] != "XX") && (board1[wasX][wasY + 1] != "OO" ^ board1[wasX][wasY + 1] != "XX"))
 				isLegal = false;
 			moveType = 0;
 		}
 
-		else if (abs(wasX - willX) == 1)
+		else if (abs(wasX - willX) == 1 && willY - wasY == 1)
 		{
-			if (board1[willX][willY][0] != 'B' && willY - wasY != 1)
-				isLegal = true;
+			if (board1[willX][willY][0] == 'W' && willY - wasY != 1)
+				isLegal = false;
 		}
 	}
 
