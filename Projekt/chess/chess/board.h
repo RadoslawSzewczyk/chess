@@ -21,11 +21,15 @@ public:
 
 	void update_board();
 
+	void move_piece(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, char promotion, int moveType, std::string board1[8][8], std::vector<std::shared_ptr<piece>>& pieceTab, int which);
+
 	std::string whoToMoveF();
+
+	bool is_checkmate();
 
 	bool isKingInCheck();
 
-	bool isCheckmate();
+	bool isOpponentKingInCheck();
 
 	int pieceCount();
 

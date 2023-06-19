@@ -1,5 +1,6 @@
 # include "board.h"
 # include <fstream>
+# include <vector>
 
 board::board()
 //board for game start
@@ -62,6 +63,30 @@ board::board()
 	std::shared_ptr<king> Wking(new king(3, 0, 0));
 	pieceTab.push_back(Wking);
 }
+
+void board::move_piece(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, char promotion, int moveType, std::string board1[8][8], std::vector<std::shared_ptr<piece>>& pieceTab, int which)
+{
+
+	int t = 99999;
+	for (int i = 0; i < pieceTab.size(); i++)
+	{
+		if (pieceTab[i]->x == willX && pieceTab[i]->y == willY)
+			t = i;
+	}
+	if (t > pieceTab.size())
+	{
+		pieceTab[which]->x = willX;
+		pieceTab[which]->y = willY;
+	}
+	else {
+		pieceTab[which]->x = willX;
+		pieceTab[which]->y = willY;
+		pieceTab.erase(next(begin(pieceTab), +t));
+	}
+
+
+}
+
 
 void board::draw_board()
 {
@@ -132,10 +157,10 @@ bool board::isKingInCheck()
 		}
 	}
 
-	
+
 	for (int i = 0; i < pieceCount(); i++)
 	{
-		if (!pieceTab[i]->validate_move(whoToMove, pieceTab[i]->colour, pieceTab[i]->x, pieceTab[i]->y, kingX, kingY, 0, 'E', boardSTR, i))
+		if (!pieceTab[i]->validate_move(whoToMove, pieceTab[i]->colour, pieceTab[i]->x, pieceTab[i]->y, kingX, kingY, 0, 'E', boardSTR, i,0))
 		{
 			return true;
 		}
@@ -144,29 +169,151 @@ bool board::isKingInCheck()
 
 	return false;
 }
-
-bool board::isCheckmate()
+bool board::isOpponentKingInCheck()
 {
-	if (!isKingInCheck())
+	int kingX = -1;
+	int kingY = -1;
+
+	for (int i = 0; i < pieceCount(); i++)
 	{
-		return false;
+		if (pieceTab[i]->nameSTR[1] == 'K' && pieceTab[i]->nameSTR[0] != (whoToMove ? 'B' : 'W'))
+		{
+			kingX = pieceTab[i]->x;
+			kingY = pieceTab[i]->y;
+			break;
+		}
 	}
 
 	for (int i = 0; i < pieceCount(); i++)
 	{
-		if (pieceTab[i]->colour != whoToMove)
+		if (!pieceTab[i]->validate_move(!whoToMove, pieceTab[i]->colour, pieceTab[i]->x, pieceTab[i]->y, kingX, kingY, 0, 'E', boardSTR, i, 0))
 		{
-			for (int x = 0; x < 8; x++)
-			{
-				for (int y = 0; y < 8; y++)
-				{
-					if (pieceTab[i]->validate_move(whoToMove, pieceTab[i]->colour, pieceTab[i]->x, pieceTab[i]->y, x, y, 0, ' ', boardSTR, i))
-					{
-						return false;
-					}
-				}
-			}
+			return true;
 		}
+	}
+
+	return false;
+}
+
+bool board::is_checkmate()
+{
+	int legalMoves = 0;
+
+	int kingX = -1;
+	int kingY = -1;
+	int kingIndex = -1;
+
+
+	if (!isOpponentKingInCheck())
+		return false;
+
+	for (int i = 0; i < pieceTab.size(); i++)
+	{
+		if (pieceTab[i]->nameSTR[1] == 'K' && pieceTab[i]->nameSTR[0] != (whoToMove ? 'B' : 'W'))
+		{
+			kingX = pieceTab[i]->x;
+			kingY = pieceTab[i]->y;
+			kingIndex = i;
+			break;
+		}
+	}
+	board tempBoard;
+
+	tempBoard.whoToMove = whoToMove;
+	tempBoard.pieceTab = pieceTab;
+
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			tempBoard.boardSTR[i][j] = boardSTR[i][j];
+		}
+	}
+
+
+	if (!pieceTab[kingIndex]->validate_move(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX + 1, kingY + 1, 0, 'E', boardSTR, kingIndex, 0))
+	{
+		tempBoard.move_piece(!whoToMove, tempBoard.pieceTab[kingIndex]->colour, kingX, kingY, kingX + 1, kingY + 1, 0, 'E', tempBoard.boardSTR, tempBoard.pieceTab, kingIndex);
+		tempBoard.update_board();
+		if(tempBoard.isOpponentKingInCheck())
+			return false;
+	}
+
+	tempBoard.whoToMove = whoToMove;
+	tempBoard.pieceTab = pieceTab;
+
+	if (!pieceTab[kingIndex]->validate_move(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX + 1, kingY, 0, 'E', boardSTR, kingIndex, 0))
+	{
+		tempBoard.move_piece(!whoToMove, tempBoard.pieceTab[kingIndex]->colour, kingX, kingY, kingX + 1, kingY + 1, 0, 'E', tempBoard.boardSTR, tempBoard.pieceTab, kingIndex);
+		tempBoard.update_board();
+		if (tempBoard.isOpponentKingInCheck())
+			return false;
+	}
+
+
+	tempBoard.whoToMove = whoToMove;
+	tempBoard.pieceTab = pieceTab;
+	if (!pieceTab[kingIndex]->validate_move(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX + 1, kingY - 1, 0, 'E', boardSTR, kingIndex, 0))
+	{
+		tempBoard.move_piece(!whoToMove, tempBoard.pieceTab[kingIndex]->colour, kingX, kingY, kingX + 1, kingY - 1, 0, 'E', tempBoard.boardSTR, tempBoard.pieceTab, kingIndex);
+		tempBoard.update_board();
+		if (tempBoard.isOpponentKingInCheck())
+			return false;
+	}
+
+
+	tempBoard.whoToMove = whoToMove;
+	tempBoard.pieceTab = pieceTab;
+	if (!pieceTab[kingIndex]->validate_move(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX - 1, kingY - 1, 0, 'E', boardSTR, kingIndex, 0))
+	{
+		tempBoard.move_piece(!whoToMove, tempBoard.pieceTab[kingIndex]->colour, kingX, kingY, kingX - 1, kingY - 1, 0, 'E', tempBoard.boardSTR, tempBoard.pieceTab, kingIndex);
+		tempBoard.update_board();
+		if (tempBoard.isOpponentKingInCheck())
+			return false;
+	}
+
+
+	tempBoard.whoToMove = whoToMove;
+	tempBoard.pieceTab = pieceTab;
+	if (!pieceTab[kingIndex]->validate_move(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX, kingY - 1, 0, 'E', boardSTR, kingIndex, 0))
+	{
+		tempBoard.move_piece(!whoToMove, tempBoard.pieceTab[kingIndex]->colour, kingX, kingY, kingX, kingY - 1, 0, 'E', tempBoard.boardSTR, tempBoard.pieceTab, kingIndex);
+		tempBoard.update_board();
+		if (tempBoard.isOpponentKingInCheck())
+			return false;
+	}
+
+
+	tempBoard.whoToMove = whoToMove;
+	tempBoard.pieceTab = pieceTab;
+	if (!pieceTab[kingIndex]->validate_move(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX - 1, kingY, 0, 'E', boardSTR, kingIndex, 0))
+	{
+		tempBoard.move_piece(!whoToMove, tempBoard.pieceTab[kingIndex]->colour, kingX, kingY, kingX - 1, kingY, 0, 'E', tempBoard.boardSTR, tempBoard.pieceTab, kingIndex);
+		tempBoard.update_board();
+		if (tempBoard.isOpponentKingInCheck())
+			return false;
+	}
+
+
+	tempBoard.whoToMove = whoToMove;
+	tempBoard.pieceTab = pieceTab;
+	if (!pieceTab[kingIndex]->validate_move(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX - 1, kingY + 1, 0, 'E', boardSTR, kingIndex, 0))
+	{
+		tempBoard.move_piece(!whoToMove, tempBoard.pieceTab[kingIndex]->colour, kingX, kingY, kingX - 1, kingY + 1, 0, 'E', tempBoard.boardSTR, tempBoard.pieceTab, kingIndex);
+		tempBoard.update_board();
+		if (tempBoard.isOpponentKingInCheck())
+			return false;
+	}
+
+
+	tempBoard.whoToMove = whoToMove;
+	tempBoard.pieceTab = pieceTab;
+	if (!pieceTab[kingIndex]->validate_move(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX , kingY + 1, 0, 'E', boardSTR, kingIndex, 0))
+	{
+		tempBoard.move_piece(!whoToMove, tempBoard.pieceTab[kingIndex]->colour, kingX, kingY, kingX, kingY + 1, 0, 'E', tempBoard.boardSTR, tempBoard.pieceTab, kingIndex);
+		tempBoard.update_board();
+		if (tempBoard.isOpponentKingInCheck())
+			return false;
 	}
 
 	return true;

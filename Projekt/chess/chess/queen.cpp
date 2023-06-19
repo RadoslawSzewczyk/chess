@@ -22,7 +22,7 @@ queen::queen(int xC, int yC, bool colourC)
 
 
 
-bool queen::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int whichT)
+bool queen::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int whichT, bool print)
 {
     char whoToMoveC;
     if (whoToMove)
@@ -38,7 +38,7 @@ bool queen::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, 
     if (willX > 7 || willX < 0 || willY > 7 || willY < 0)
         isLegal = false;
 
-    if (whoToMoveC == targetPiece[0]) {
+    if (board1[wasX][wasY][0] == targetPiece[0]) {
         isLegal = false;
     }
 
@@ -83,7 +83,10 @@ bool queen::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, 
 
     if (!isLegal)
     {
-        std::cout << "That is an illegal move" << std::endl;
+        if (print)
+        {
+            std::cout << "That is illegal move" << std::endl;
+        }
         return 1;
     }
     else

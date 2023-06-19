@@ -13,12 +13,14 @@ int main()
 {
     board board1;
     ChessDatabase database;
+
     get_consent(board1, database);
 
     while (true)
     {
         board1.update_board();
         board1.draw_board();
+
         moveFromPlayer newmove;
         bool temp = false;
         bool temp2 = false;
@@ -38,7 +40,7 @@ int main()
                 continue;
             }
 
-            temp = board1.pieceTab[whichT]->validate_move(board1.whoToMove, board1.pieceTab[whichT]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.moveType, newmove.promotionCH, board1.boardSTR, whichT);
+            temp = board1.pieceTab[whichT]->validate_move(board1.whoToMove, board1.pieceTab[whichT]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.moveType, newmove.promotionCH, board1.boardSTR, whichT,1);
 
             if (board1.isKingInCheck())
             {
@@ -49,9 +51,9 @@ int main()
         } while (temp);
 
 
-        move_piece(board1.whoToMove, board1.pieceTab[temp3]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH, newmove.moveType, board1.boardSTR, board1.pieceTab, temp3);
-
-        if (board1.isCheckmate())
+        board1.move_piece(board1.whoToMove, board1.pieceTab[temp3]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH, newmove.moveType, board1.boardSTR, board1.pieceTab, temp3);
+        board1.update_board();
+        if (board1.is_checkmate())
         {
             std::cout << "Checkmate! " << board1.whoToMoveF() << " wins." << std::endl;
             break;

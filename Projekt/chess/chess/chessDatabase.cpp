@@ -23,7 +23,7 @@ void ChessDatabase::addPosition(const ChessPosition& position)
 
 void ChessDatabase::savePositionsToFile()
 {
-    std::ofstream file("ChessPositions.txt",std::ios::app);
+    std::ofstream file("ChessPositions.txt");
 
     if (file.is_open()) {
         for (const ChessPosition& position : positions) {
@@ -52,70 +52,69 @@ void ChessDatabase::savePositionsToFile()
 
 std::vector<ChessPosition> ChessDatabase::loadPositionsFromFile()
 {
+    positions.clear();
     std::ifstream file("ChessPositions.txt");
-
+    ChessPosition position;
+    bool isValidPosition = false;
     if (file.is_open()) {
-        std::vector<ChessPosition> positions;
 
         std::string line;
         while (std::getline(file, line)) {
-            if (line.substr(0, 5) == "Name:")
-            {
-                ChessPosition position;
+            if (line.substr(0, 5) == "Name:") {
+                if (isValidPosition) {
+                    positions.push_back(position);
+                    isValidPosition = false;
+                }
+
                 position.name = line.substr(6);
 
                 std::getline(file, line);
                 position.date = line.substr(6);
                 std::getline(file, line);
-                position.whiteCastle = (line.substr(16) == "true");;
+                position.whiteCastle = (line.substr(16) == "1");
                 std::getline(file, line);
-                position.whiteCastle = (line.substr(16) == "true");
+                position.blackCastle = (line.substr(16) == "1");
                 std::getline(file, line);
-                position.whiteCastle = (line.substr(13) == "true");
+                position.whoToMove = (line.substr(13) == "1");
 
-                while (std::getline(file, line) && !line.empty())
-                {
+                position.pieceTab.clear();
+                while (std::getline(file, line) && !line.empty()) {
                     int x = std::stoi(line.substr(0, 1));
                     int y = std::stoi(line.substr(1, 1));
-                    bool colour = (line.substr(2, 1) == "W");
+                    bool colour = (line.substr(2, 1) == "1");
                     char typeCharF = line.substr(3, 1)[0];
 
                     std::shared_ptr<piece> piece;
-                    if (typeCharF == 'Q')
-                    {
+                    if (typeCharF == 'Q') {
                         piece = std::make_shared<queen>(x, y, colour);
                     }
-                    else if (typeCharF == 'R')
-                    {
+                    else if (typeCharF == 'R') {
                         piece = std::make_shared<rook>(x, y, colour);
                     }
-                    else if (typeCharF == 'B')
-                    {
+                    else if (typeCharF == 'B') {
                         piece = std::make_shared<bishop>(x, y, colour);
                     }
-                    else if (typeCharF == 'P')
-                    {
+                    else if (typeCharF == 'P') {
                         piece = std::make_shared<pawn>(x, y, colour);
                     }
-                    else if (typeCharF == 'K')
-                    {
+                    else if (typeCharF == 'K') {
                         piece = std::make_shared<king>(x, y, colour);
                     }
-                    else if (typeCharF == 'N')
-                    {
+                    else if (typeCharF == 'N') {
                         piece = std::make_shared<knight>(x, y, colour);
                     }
 
                     position.pieceTab.push_back(piece);
                 }
 
-                positions.push_back(position);
+                isValidPosition = true;
             }
         }
-
-        file.close();
-
-
-        return positions;
     }
+    if (isValidPosition) {
+        positions.push_back(position);
+    }
+    file.close();
+
+    return positions;
 }

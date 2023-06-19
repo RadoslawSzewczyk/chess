@@ -20,7 +20,7 @@ public:
 
 	char promotionCH = 'E';
 
-	void get_move(board& board1, ChessDatabase database);
+	void get_move(board& board1, ChessDatabase& database);
 
 	
 };

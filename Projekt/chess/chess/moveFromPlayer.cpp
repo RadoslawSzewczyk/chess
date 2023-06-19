@@ -15,7 +15,7 @@ std::string getCurrentDateTime()
 	return ss.str();
 }
 
-void moveFromPlayer::get_move(board& board1, ChessDatabase database)
+void moveFromPlayer::get_move(board& board1, ChessDatabase& database)
 {
 
 	std::string input;
@@ -54,7 +54,7 @@ loop:
 		position.name = inputName;
 		position.date = dateTime;
 		position.pieceTab = board1.pieceTab;
-		position.whoToMove = board1.whoToMove;
+		position.whoToMove = !board1.whoToMove;
 		position.blackCastle = board1.blackCastle;
 		position.whiteCastle = board1.whiteCastle;
 
@@ -67,7 +67,7 @@ loop:
 	{
 		goto exit_loop;
 	}
-	std::cout << "Invalid move\nYour move: ";
+	std::cout << "Invalid move ";
 
 	goto loop;
 

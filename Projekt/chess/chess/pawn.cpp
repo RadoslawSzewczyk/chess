@@ -20,7 +20,7 @@ pawn::pawn(int xC, int yC, bool colourC)
 	}
 }
 
-bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int whichT)
+bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int whichT, bool print)
 {
 	bool isLegal = true;
 
@@ -35,8 +35,9 @@ bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 		isLegal = false;
 	}
 
-	if (willX > 8 || willX < 0 || willY > 8 || willY < 1)
+	if (willX > 7 || willX < 0 || willY > 7 || willY < 0)
 		isLegal = false;
+
 
 	if (abs(wasX - willX) >= 2)
 		isLegal = false;
@@ -106,7 +107,10 @@ bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 
 	if (!isLegal)
 	{
-		std::cout << "That is illegal move" << std::endl;
+		if (print)
+		{
+			std::cout << "That is illegal move" << std::endl;
+		}
 		return 1;
 	}
 	else

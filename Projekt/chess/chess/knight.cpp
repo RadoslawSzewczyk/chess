@@ -22,7 +22,7 @@ knight::knight(int xC, int yC, bool colourC)
 
 
 
-bool knight::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int whichT)
+bool knight::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int whichT, bool print)
 {
     char whoToMoveC;
     if (whoToMove)
@@ -32,8 +32,9 @@ bool knight::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY,
     bool isLegal = true;
     if (whichT == 99)
         isLegal = false;
-    if (willX > 8 || willX < 1 || willY > 8 || willY < 1)
+    if (willX > 7 || willX < 0 || willY > 7 || willY < 0)
         isLegal = false;
+
     if (board1[wasX][wasY] == "OO" || board1[wasX][wasY] == "XX" || whoToMove != pieceColour || board1[willX][willY][0] == whoToMoveC)
         isLegal = false;
 
@@ -53,10 +54,12 @@ bool knight::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY,
     else {
         isLegal = false;
     }
-
     if (!isLegal)
     {
-        std::cout << "That is illegal move" << std::endl;
+        if (print)
+        {
+            std::cout << "That is illegal move" << std::endl;
+        }
         return 1;
     }
     else
