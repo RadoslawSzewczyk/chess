@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClInclude Include="board.h" />
     <ClInclude Include="chessDatabase.h" />
-    <ClInclude Include="functions.h" />
     <ClInclude Include="moveFromPlayer.h" />
     <ClInclude Include="piece.h" />
   </ItemGroup>

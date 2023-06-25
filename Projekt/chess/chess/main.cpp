@@ -6,15 +6,14 @@
 # include "piece.h"
 # include <fstream>
 # include <sstream>
-# include "functions.h"
 # include "chessDatabase.h"
 
 int main()
 {
     board board1;
     ChessDatabase database;
-
-    get_consent(board1, database);
+    database.loadPositionsFromFile();
+    moveFromPlayer::get_consent(board1, database);
 
     while (true)
     {
@@ -30,7 +29,7 @@ int main()
         {
             temp = false;
             newmove.get_move(board1, database);
-            int whichT = which(board1, newmove);
+            int whichT = newmove.which(board1);
             temp3 = whichT;
 
             if (whichT == 99) // error code check
@@ -65,5 +64,8 @@ int main()
     }
 
     database.savePositionsToFile();
+    system("pause");
+    
+
 }
 

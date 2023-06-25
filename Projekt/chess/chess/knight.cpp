@@ -48,12 +48,11 @@ bool knight::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY,
 
     int dx = abs(wasX - willX);
     int dy = abs(wasY - willY);
-    if ((dx == 1 && dy == 2) || (dx == 2 && dy == 1)) {
-        isLegal = true;
-    }
-    else {
+    if (!((dx == 1 && dy == 2) || (dx == 2 && dy == 1)))
+    {
         isLegal = false;
     }
+
     if (!isLegal)
     {
         if (print)

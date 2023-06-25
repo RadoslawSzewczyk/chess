@@ -52,7 +52,7 @@ void ChessDatabase::savePositionsToFile()
 
 std::vector<ChessPosition> ChessDatabase::loadPositionsFromFile()
 {
-    positions.clear();
+
     std::ifstream file("ChessPositions.txt");
     ChessPosition position;
     bool isValidPosition = false;
@@ -77,7 +77,7 @@ std::vector<ChessPosition> ChessDatabase::loadPositionsFromFile()
                 std::getline(file, line);
                 position.whoToMove = (line.substr(13) == "1");
 
-                position.pieceTab.clear();
+                //position.pieceTab.clear();
                 while (std::getline(file, line) && !line.empty()) {
                     int x = std::stoi(line.substr(0, 1));
                     int y = std::stoi(line.substr(1, 1));

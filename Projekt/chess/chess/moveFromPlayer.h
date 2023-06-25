@@ -12,7 +12,6 @@ public:
 	//o-o
 	//o-o-o
 	//a7Qa8
-	//
 
 	int wasX, wasY, willX, willY;
 
@@ -22,5 +21,7 @@ public:
 
 	void get_move(board& board1, ChessDatabase& database);
 
-	
+	static void get_consent(board& board1, ChessDatabase& database);
+
+	int which(board& board1);
 };
