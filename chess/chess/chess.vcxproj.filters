@@ -45,6 +45,12 @@
     <ClCompile Include="chessDatabase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="computer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="twoHumans.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="piece.h">
@@ -57,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="chessDatabase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -130,6 +130,7 @@
     <ClCompile Include="bishop.cpp" />
     <ClCompile Include="board.cpp" />
     <ClCompile Include="chessDatabase.cpp" />
+    <ClCompile Include="computer.cpp" />
     <ClCompile Include="knight.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="moveFromPlayer.cpp" />
@@ -137,10 +138,12 @@
     <ClCompile Include="king.cpp" />
     <ClCompile Include="queen.cpp" />
     <ClCompile Include="rook.cpp" />
+    <ClCompile Include="twoHumans.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="board.h" />
     <ClInclude Include="chessDatabase.h" />
+    <ClInclude Include="gameMode.h" />
     <ClInclude Include="moveFromPlayer.h" />
     <ClInclude Include="piece.h" />
   </ItemGroup>

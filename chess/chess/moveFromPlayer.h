@@ -23,5 +23,7 @@ public:
 
 	static void get_consent(board& board1, ChessDatabase& database);
 
+	static void choose_game_mode();
+
 	int which(board& board1);
 };

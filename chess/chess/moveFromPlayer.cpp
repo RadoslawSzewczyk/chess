@@ -4,6 +4,7 @@
 #include <iomanip>
 # include <sstream>
 # include "chessDatabase.h"
+# include "gameMode.h"
 
 std::string getCurrentDateTime()
 {
@@ -102,7 +103,7 @@ void moveFromPlayer::get_consent(board& board1, ChessDatabase& database)
 {
 	while (true) {
 		int input;
-		std::cout << "Wanna play chess?\n Press 1 to start\n Press 2 to exit\n Press 3 to load position\n Press 4 to delete position" << std::endl;
+		std::cout << " Press 1 to start\n Press 2 to exit\n Press 3 to load position\n Press 4 to delete position" << std::endl;
 		std::cin >> input;
 
 		if (std::cin.fail()) {
@@ -111,8 +112,12 @@ void moveFromPlayer::get_consent(board& board1, ChessDatabase& database)
 			std::cout << "Invalid input. Please enter a number." << std::endl;
 			continue;
 		}
-
-		if (input == 2) {
+		if (input == 1)
+		{
+			system("cls");
+			break;
+		}
+		else if (input == 2) {
 			system("pause");
 			exit(0);
 		}
@@ -166,9 +171,33 @@ void moveFromPlayer::get_consent(board& board1, ChessDatabase& database)
 				std::cout << "Invalid position index!" << std::endl;
 			}
 		}
+		else
+			continue;
 
-		system("cls");
-		break;
+	}
+}
+
+void moveFromPlayer::choose_game_mode()
+{
+	int input;
+	while (true) 
+	{
+		std::cout << "Choose Game mode\n 1. Player vs Player\n 2. Player vs Computer\n";
+		std::cin >> input;
+		if (input == 1)
+		{
+			two_humans();
+			break;
+		}
+		else if (input == 2)
+		{
+			computer();
+			break;
+		}
+		else
+		{
+			continue;
+		}
 	}
 }
 
@@ -183,5 +212,5 @@ int moveFromPlayer::which(board& board1)
 			break;
 		}
 	}
-	return 99; //error code
+	return 99;
 }
