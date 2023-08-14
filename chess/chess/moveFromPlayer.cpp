@@ -1,10 +1,6 @@
 #pragma warning(disable : 4996)
+
 # include "moveFromPlayer.h"
-# include <chrono>
-#include <iomanip>
-# include <sstream>
-# include "chessDatabase.h"
-# include "gameMode.h"
 
 std::string getCurrentDateTime()
 {
@@ -16,7 +12,7 @@ std::string getCurrentDateTime()
 
 	return ss.str();
 }
-
+//promotion force choose
 void moveFromPlayer::get_move(board& board1, ChessDatabase& database)
 {
 
@@ -82,16 +78,13 @@ exit_loop:
 		willX = 7-(int(input[3]) - 97);
 		willY = (int(input[4]) - 49);
 
-
-		if (input[2] == '-')
-			moveType = 0;
-		if (input[2] == 'x')
-			moveType = 1;
 		if (input[2] == 'Q' || input[2] == 'N' || input[2] == 'B' || input[2] == 'R')
 		{
 			moveType = 2;
 			promotionCH = input[2];
 		}
+		else
+			promotionCH = 'E';
 	}
 	else if (input[4] == 'o')
 		moveType = 4;

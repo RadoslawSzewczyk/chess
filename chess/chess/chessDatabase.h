@@ -9,9 +9,9 @@ struct ChessPosition {
     std::string name;
     std::string date;
     std::vector<std::shared_ptr<piece>> pieceTab;
-    bool whoToMove;
-    bool whiteCastle;
-    bool blackCastle;
+    bool whoToMove = 0;
+    bool whiteCastle = 0;
+    bool blackCastle = 0;
 };
 
 class ChessDatabase 

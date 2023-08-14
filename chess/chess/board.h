@@ -21,7 +21,7 @@ public:
 
 	void update_board();
 
-	void move_piece(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, char promotion, int moveType, std::string board1[8][8], std::vector<std::shared_ptr<piece>>& pieceTab, int which);
+	void move_piece(int wasX, int wasY, int willX, int willY, char promotion, int which);
 
 	std::string whoToMoveF();
 
@@ -32,6 +32,8 @@ public:
 	bool isOpponentKingInCheck();
 
 	int pieceCount();
+
+	void add();
 
 	board();
 	

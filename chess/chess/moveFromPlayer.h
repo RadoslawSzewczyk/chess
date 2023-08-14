@@ -1,9 +1,14 @@
 #pragma once
 # include <iostream>
 # include <string>
-# include "board.h"
 # include <fstream>
+# include <chrono>
+#include <iomanip>
+# include <sstream>
 # include "chessDatabase.h"
+# include "piece.h"
+# include "gameMode.h"
+# include "board.h"
 
 class moveFromPlayer
 {
@@ -15,7 +20,7 @@ public:
 
 	int wasX, wasY, willX, willY;
 
-	int moveType; //0 move 1 capture 2 promotion 3 castle 4 long castle
+	int moveType = 5; //0 move 1 capture 2 promotion 3 castle 4 long castle
 
 	char promotionCH = 'E';
 
