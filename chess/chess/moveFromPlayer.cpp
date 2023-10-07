@@ -61,11 +61,16 @@ loop:
 	}
 
 
-	if ((input.length() >= 3 && input.length() < 6) && (int(input[0]) >= 97 && int(input[0]) <= 104 || int(input[0]) == 111) && (int(input[1]) - 48 >= 1 && int(input[1]) - 48 <= 8 || input[1] == '-') && (input[2] == '-' || input[2] == 'x' || input[2] == 'o' || input[2] == 'Q' || input[2] == 'R' || input[2] == 'N' || input[2] == 'B') && (int(input[3]) >= 97 && int(input[3]) <= 104 || int(input[3]) == 111 || input.empty()) && (int(input[4]) - 48 >= 1 && int(input[4]) - 48 <= 8 || input[4] == '-' || input.empty()))
+	if ((input.length() >= 3 && input.length() < 6) &&
+		(int(input[0]) >= 97 && int(input[0]) <= 104 || int(input[0]) == 111) &&
+		(int(input[1]) - 48 >= 1 && int(input[1]) - 48 <= 8) &&
+		(input[2] == '-' || input[2] == 'x' || input[2] == 'Q' || input[2] == 'R' || input[2] == 'N' || input[2] == 'B') &&
+		((int(input[3]) >= 97) && int(input[3]) <= 104 || input.empty()) &&
+		(int(input[4]) - 48 >= 1 && int(input[4]) - 48 <= 8 || input.empty()) || input == "o-o-o" || input == "o-o")
 	{
-		goto exit_loop;
+	goto exit_loop;
 	}
-	std::cout << "Invalid move ";
+	std::cout << "Invalid move \n";
 
 	goto loop;
 
