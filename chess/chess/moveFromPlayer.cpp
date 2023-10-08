@@ -60,15 +60,21 @@ loop:
 		std::cout << "Position added " << std::endl;
 	}
 
+	if (input == "o-o-o" || input == "o-o")
+	{
+		rawInput = input;
+		goto exit_loop;
+	}
 
 	if ((input.length() >= 3 && input.length() < 6) &&
 		(int(input[0]) >= 97 && int(input[0]) <= 104 || int(input[0]) == 111) &&
 		(int(input[1]) - 48 >= 1 && int(input[1]) - 48 <= 8) &&
 		(input[2] == '-' || input[2] == 'x' || input[2] == 'Q' || input[2] == 'R' || input[2] == 'N' || input[2] == 'B') &&
 		((int(input[3]) >= 97) && int(input[3]) <= 104 || input.empty()) &&
-		(int(input[4]) - 48 >= 1 && int(input[4]) - 48 <= 8 || input.empty()) || input == "o-o-o" || input == "o-o")
+		(int(input[4]) - 48 >= 1 && int(input[4]) - 48 <= 8 || input.empty()))
 	{
-	goto exit_loop;
+		rawInput = input;
+		goto exit_loop;
 	}
 	std::cout << "Invalid move \n";
 
@@ -91,10 +97,6 @@ exit_loop:
 		else
 			promotionCH = 'E';
 	}
-	else if (input[4] == 'o')
-		moveType = 4;
-	else
-		moveType = 3;
 }
 
 void moveFromPlayer::get_consent(board& board1, ChessDatabase& database)
@@ -180,20 +182,23 @@ void moveFromPlayer::choose_game_mode()
 	int input;
 	while (true) 
 	{
-		std::cout << "Choose Game mode\n 1. Player vs Player\n 2. Player vs Computer\n";
+		std::cout << "Choose Game mode\n 1. Player vs Player\n 2. Player vs Computer [NOT WORKING]\n";
 		std::cin >> input;
 		if (input == 1)
 		{
+			system("cls");
 			two_humans();
 			break;
 		}
 		else if (input == 2)
 		{
+			system("cls");
 			computer();
 			break;
 		}
 		else
 		{
+			system("cls");
 			continue;
 		}
 	}

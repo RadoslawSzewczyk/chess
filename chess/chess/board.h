@@ -27,13 +27,13 @@ public:
 
 	bool is_checkmate();
 
-	bool isKingInCheck();
+	bool isKingInCheck(int kingX = -1, int kingY = -1);
 
 	bool isOpponentKingInCheck();
 
 	int pieceCount();
 
-	void add();
+	bool castle(bool kingside);
 
 	board();
 	

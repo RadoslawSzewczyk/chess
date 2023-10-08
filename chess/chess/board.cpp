@@ -1,6 +1,5 @@
 # include "board.h"
 
-
 board::board()
 //board for game start
 {
@@ -62,7 +61,6 @@ board::board()
 	std::shared_ptr<king> Wking(new king(3, 0, 0));
 	pieceTab.push_back(Wking);
 }
-
 
 void board::move_piece(int wasX, int wasY, int willX, int willY, char promotion, int which)
 {
@@ -136,7 +134,6 @@ void board::move_piece(int wasX, int wasY, int willX, int willY, char promotion,
 
 }
 
-
 void board::draw_board()
 {
 	for (int i = 0; i < 8; i++)
@@ -191,18 +188,18 @@ std::string board::whoToMoveF()
 	}
 }
 
-bool board::isKingInCheck()
+bool board::isKingInCheck(int kingX = -1, int kingY = -1)
 {
-	int kingX = -1;
-	int kingY = -1;
-
-	for (int i = 0; i < pieceCount(); i++)
+	if (kingX == -1)
 	{
-		if (pieceTab[i]->nameSTR[1] == 'K' && pieceTab[i]->nameSTR[0] == (whoToMove ? 'B' : 'W'))
+		for (int i = 0; i < pieceCount(); i++)
 		{
-			kingX = pieceTab[i]->x;
-			kingY = pieceTab[i]->y;
-			break;
+			if (pieceTab[i]->nameSTR[1] == 'K' && pieceTab[i]->nameSTR[0] == (whoToMove ? 'B' : 'W'))
+			{
+				kingX = pieceTab[i]->x;
+				kingY = pieceTab[i]->y;
+				break;
+			}
 		}
 	}
 
@@ -367,4 +364,67 @@ bool board::is_checkmate()
 	}
 
 	return true;
+}
+
+bool board::castle(bool kingside)
+{
+	if (boardSTR[4][0] == "WK" || boardSTR[4][7] == "BK")
+		return 0;
+	int kingX, kingY;
+	int rookX, rookY;
+
+	if (whoToMove == 0) {
+		kingX = 3;
+		kingY = 0;
+		rookX = (kingside) ? 5 : 2;
+		rookY = 0;
+		if (!kingside)
+		{
+			if (boardSTR[1][0][0] != 'O' && boardSTR[2][0][0] != 'X' && boardSTR[3][0][0] != 'X' && boardSTR[0][0] != "WR")
+				return 0;
+			if (isKingInCheck(1, 0) == 1 || isKingInCheck(2, 0) == 1 || isKingInCheck(3, 0) == 1)
+				return 0;
+		}
+		else 
+		{
+			if (boardSTR[6][0][0] != 'O' && boardSTR[5][0][0] != 'X' && boardSTR[0][0] != "WR")
+			{
+				return 0;
+			}
+			if (isKingInCheck(6, 0) == 1 || isKingInCheck(5, 0) == 1)
+				return 0;
+		}
+	}
+	else 
+	{
+		kingX = 3;
+		kingY = 7;
+		rookX = (kingside) ? 5 : 2;
+		rookY = 7;
+		if (!kingside)
+		{
+			if (boardSTR[1][7][0] != 'O' && boardSTR[2][7][0] != 'X' && boardSTR[3][7][0] != 'X' && boardSTR[0][7] != "WR")
+				return 0;
+			if (isKingInCheck(1, 7) == 1 || isKingInCheck(2, 7) == 1 || isKingInCheck(3, 7) == 1)
+				return 0;
+		}
+		else
+		{
+			if (boardSTR[6][7][0] != 'O' && boardSTR[5][7][0] != 'X' && boardSTR[0][7] != "WR")
+				return 0;
+			if (isKingInCheck(6, 7) == 1 || isKingInCheck(5, 7) == 1)
+				return 0;
+		}
+	}
+
+	// TODO CHECK
+
+	if (kingside) {
+		move_piece(kingX, kingY, kingX + 2, kingY, 'E', -1);
+		move_piece(rookX, rookY, rookX - 2, rookY, 'E', -1);
+	}
+	else {
+		move_piece(kingX, kingY, kingX - 2, kingY, 'E', -1);
+		move_piece(rookX, rookY, rookX + 3, rookY, 'E', -1);
+	}
 }

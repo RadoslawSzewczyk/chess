@@ -24,6 +24,8 @@ public:
 
 	char promotionCH = 'E';
 
+	std::string rawInput;
+
 	void get_move(board& board1, ChessDatabase& database);
 
 	static void get_consent(board& board1, ChessDatabase& database);
