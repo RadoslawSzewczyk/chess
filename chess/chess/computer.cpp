@@ -1,9 +1,9 @@
 # include "gameMode.h"
 
-int evaluatePosition(board board1) {
+int evaluatePosition(board& board1) {
     int score = 0;
-
     int pieceValues[] = { 100, 300, 300, 500, 900, 0 };
+
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 8; ++j) {
             std::string piece = board1.boardSTR[i][j];
@@ -23,39 +23,69 @@ int evaluatePosition(board board1) {
     return score;
 }
 
-std::vector <std::string> all_legal_moves()
+std::vector <moveFromPlayer> all_legal_moves(board& board1)
 {
-    //TODO
-    if (pieceTab[i]->validate_move(whoToMove, pieceTab[i]->colour, startX, startY, willX, willY, 0, 'E', boardSTR, i, 0)) {
-        moves.push_back(move);
+
+    std::vector <moveFromPlayer> moves;
+
+    for (int i = 0; i < board1.pieceTab.size(); i++)
+    {
+        for (int j = 0; j < board1.pieceTab.size(); j++)
+        {
+            moveFromPlayer newmove;
+            newmove.wasX = board1.pieceTab[i] ->x;
+            newmove.wasY = board1.pieceTab[i]->y;
+            newmove.willX = board1.pieceTab[j]->x;
+            newmove.willY = board1.pieceTab[j]->y;
+
+            if (!board1.pieceTab[i]->validate_move(board1.whoToMove, board1.pieceTab[i]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, 0, 'E', board1.boardSTR, i, 0))
+            {
+                moves.push_back(newmove);
+            }
+        }
+    }
+    return moves;
 }
 
-std::string chessSearch(int depth, char color) 
+struct chessReturn
 {
+    moveFromPlayer bestMove;
+    int eval;
+};
+
+chessReturn chessSearch(int depth, char color, board board1) 
+{
+
     const char WHITE = 'w';
     const char BLACK = 'b';
 
-    std::string bestMove = "";
+    moveFromPlayer bestMove;
     int bestScore = (color == WHITE) ? INT_MIN : INT_MAX;
+    chessReturn bestMoveAndEval;
 
     if (depth == 0) 
     {
-        // Evaluate the current position
-        // (You need to implement an evaluation function)
-        return bestMove;
+        bestMoveAndEval.bestMove = bestMove;
+        bestMoveAndEval.eval = evaluatePosition(board1);
+
+        return bestMoveAndEval;
     }
 
-    std::vector<std::string> moves = generateMoves();
-
-    for (const std::string& move : moves) {
+    std::vector<moveFromPlayer> moves = all_legal_moves(board1);
+    //ERR VECTOR OUT OF RANGE
+    for (int i = 0; i < moves.size(); i++) 
+    {
         // Make the move on the chess board
-        makeMove(move);
+        board1.move_piece(moves[i].wasX, moves[i].wasY, moves[i].willX, moves[i].willY, 'E', i);
 
         // Recursively search the next position with decreased depth
-        int score = chessSearch(depth - 1, (color == WHITE) ? BLACK : WHITE);
+        chessReturn moveAndEval = chessSearch(depth - 1, (color == WHITE) ? BLACK : WHITE, board1);
+        int score = moveAndEval.eval;
+        moveFromPlayer move = moveAndEval.bestMove;
 
         // Undo the move to explore other possibilities
-        undoMove(move);
+        board1.move_piece(moves[i].willX, moves[i].willY, moves[i].wasX, moves[i].wasY, 'E', i);
+
 
         // Update the best move and score based on the current move
         if ((color == WHITE && score > bestScore) || (color == BLACK && score < bestScore)) {
@@ -65,7 +95,7 @@ std::string chessSearch(int depth, char color)
     }
 
     // Return the best move found at this depth
-    return bestMove;
+    return bestMoveAndEval;
 }
 
 void computer()
@@ -99,7 +129,9 @@ void computer()
 
         if (board1.whoToMove == computerColour)
         {
-            //search function
+            moveFromPlayer newmove = chessSearch(5, board1.whoToMove, board1).bestMove;
+            int whichT = newmove.which(board1);
+            board1.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH, whichT);
             board1.whoToMove = !board1.whoToMove;
             continue;
         }

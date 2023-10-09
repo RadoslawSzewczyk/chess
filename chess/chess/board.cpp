@@ -188,7 +188,7 @@ std::string board::whoToMoveF()
 	}
 }
 
-bool board::isKingInCheck(int kingX = -1, int kingY = -1)
+bool board::isKingInCheck(int kingX, int kingY)
 {
 	if (kingX == -1)
 	{

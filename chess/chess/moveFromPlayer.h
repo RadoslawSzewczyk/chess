@@ -24,7 +24,7 @@ public:
 
 	char promotionCH = 'E';
 
-	std::string rawInput;
+	std::string rawInput = "";
 
 	void get_move(board& board1, ChessDatabase& database);
 

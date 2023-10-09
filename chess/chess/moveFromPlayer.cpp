@@ -182,7 +182,7 @@ void moveFromPlayer::choose_game_mode()
 	int input;
 	while (true) 
 	{
-		std::cout << "Choose Game mode\n 1. Player vs Player\n 2. Player vs Computer [NOT WORKING]\n";
+		std::cout << "Choose Game mode\n 1. Player vs Player\n 2. Player vs Computer [WORK IN PROGRESS...]\n";
 		std::cin >> input;
 		if (input == 1)
 		{
