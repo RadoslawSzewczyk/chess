@@ -1,4 +1,6 @@
 # include "gameMode.h"
+#include <chrono>
+
 
 int evaluatePosition(board& board1) {
 	int score = 0;
@@ -25,6 +27,7 @@ int evaluatePosition(board& board1) {
 
 std::vector <moveFromPlayer> all_legal_moves(board& board1)
 {
+	board boardT;
 	//lapiemy jednego i lecimy tylko po wszystkich polach
 	std::vector <moveFromPlayer> moves;
 	for (int k = 0; k < board1.pieceTab.size(); k++)
@@ -32,9 +35,9 @@ std::vector <moveFromPlayer> all_legal_moves(board& board1)
 		moveFromPlayer newmove;
 		newmove.wasX = board1.pieceTab[k]->x;
 		newmove.wasY = board1.pieceTab[k]->y;
-		for (int i = 0; i < board1.pieceTab.size(); i++)
+		for (int i = 0; i < 8; i++)
 		{
-			for (int j = 0; j < board1.pieceTab.size(); j++)
+			for (int j = 0; j < 8; j++)
 			{
 				newmove.willX = i;
 				newmove.willY = j;
@@ -42,6 +45,10 @@ std::vector <moveFromPlayer> all_legal_moves(board& board1)
 				if (!board1.pieceTab[i]->validate_move(board1.whoToMove, board1.pieceTab[i]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, 0, 'E', board1.boardSTR, i, 0))
 				{
 					moves.push_back(newmove);
+					boardT.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY,'E',i);
+					std::chrono::seconds timespan(5);
+					boardT.move_piece(newmove.willX, newmove.willY, newmove.wasX, newmove.wasY, 'E',i);
+
 				}
 			}
 		}
@@ -77,6 +84,7 @@ chessReturn chessSearch(int depth, char color, board board1)
 	//ERR VECTOR OUT OF RANGE
 	for (int i = 0; i < moves.size(); i++)
 	{
+		
 		// Make the move on the chess board
 		board1.move_piece(moves[i].wasX, moves[i].wasY, moves[i].willX, moves[i].willY, 'E', i);
 
@@ -182,7 +190,7 @@ void computer()
 		} while (temp);
 
 
-		board1.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH, temp3);
+		board1.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH,temp3);
 		board1.update_board();
 	castleend:
 		if (board1.is_checkmate())
