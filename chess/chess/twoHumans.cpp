@@ -53,7 +53,7 @@ void two_humans()
         } while (temp);
 
 
-        board1.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH, temp3);
+        board1.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH);
         board1.update_board();
     castleend:
         if (board1.is_checkmate())

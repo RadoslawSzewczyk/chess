@@ -45,10 +45,13 @@ std::vector <moveFromPlayer> all_legal_moves(board& board1)
 				if (!board1.pieceTab[i]->validate_move(board1.whoToMove, board1.pieceTab[i]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, 0, 'E', board1.boardSTR, i, 0))
 				{
 					moves.push_back(newmove);
-					boardT.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY,'E',i);
+					boardT.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY,'E');
+					boardT.update_board();
+					boardT.draw_board();
 					std::chrono::seconds timespan(5);
-					boardT.move_piece(newmove.willX, newmove.willY, newmove.wasX, newmove.wasY, 'E',i);
-
+					boardT.move_piece(newmove.willX, newmove.willY, newmove.wasX, newmove.wasY, 'E');
+					boardT.update_board();
+					boardT.draw_board();
 				}
 			}
 		}
@@ -86,7 +89,7 @@ chessReturn chessSearch(int depth, char color, board board1)
 	{
 		
 		// Make the move on the chess board
-		board1.move_piece(moves[i].wasX, moves[i].wasY, moves[i].willX, moves[i].willY, 'E', i);
+		board1.move_piece(moves[i].wasX, moves[i].wasY, moves[i].willX, moves[i].willY, 'E');
 
 		// Recursively search the next position with decreased depth
 		chessReturn moveAndEval = chessSearch(depth - 1, (color == WHITE) ? BLACK : WHITE, board1);
@@ -94,7 +97,7 @@ chessReturn chessSearch(int depth, char color, board board1)
 		moveFromPlayer move = moveAndEval.bestMove;
 
 		// Undo the move to explore other possibilities
-		board1.move_piece(moves[i].willX, moves[i].willY, moves[i].wasX, moves[i].wasY, 'E', i);
+		board1.move_piece(moves[i].willX, moves[i].willY, moves[i].wasX, moves[i].wasY, 'E');
 
 
 		// Update the best move and score based on the current move
@@ -143,7 +146,7 @@ void computer()
 		{
 			moveFromPlayer newmove = chessSearch(5, board1.whoToMove, board1).bestMove;
 			int whichT = newmove.which(board1);
-			board1.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH, whichT);
+			board1.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH);
 			board1.whoToMove = !board1.whoToMove;
 			continue;
 		}
@@ -190,7 +193,7 @@ void computer()
 		} while (temp);
 
 
-		board1.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH,temp3);
+		board1.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH);
 		board1.update_board();
 	castleend:
 		if (board1.is_checkmate())

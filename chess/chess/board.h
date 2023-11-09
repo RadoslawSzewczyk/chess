@@ -21,7 +21,7 @@ public:
 
 	void update_board();
 
-	void move_piece(int wasX, int wasY, int willX, int willY, char promotion, int which);
+	void move_piece(int wasX, int wasY, int willX, int willY, char promotion);
 
 	std::string whoToMoveF();
 
