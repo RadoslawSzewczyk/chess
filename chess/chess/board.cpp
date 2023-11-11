@@ -79,6 +79,10 @@ void board::move_piece(int wasX, int wasY, int willX, int willY, char promotion)
 			which = i;
 			break;
 		}
+		else
+		{
+			which = 99;
+		}
 	}
 	if (which == 99)
 	{

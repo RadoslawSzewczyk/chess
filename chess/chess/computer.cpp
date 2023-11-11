@@ -42,13 +42,13 @@ std::vector <moveFromPlayer> all_legal_moves(board& board1)
 				newmove.willX = i;
 				newmove.willY = j;
 
-				if (!board1.pieceTab[i]->validate_move(board1.whoToMove, board1.pieceTab[i]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, 0, 'E', board1.boardSTR, i, 0))
+				if (board1.pieceTab[k]->validate_move(board1.whoToMove, board1.pieceTab[k]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, 0, 'E', board1.boardSTR, k, 0))
 				{
 					moves.push_back(newmove);
-					boardT.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY,'E');
+					boardT.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, 'E');
 					boardT.update_board();
 					boardT.draw_board();
-					std::chrono::seconds timespan(5);
+					std::chrono::seconds timespan(500000000);
 					boardT.move_piece(newmove.willX, newmove.willY, newmove.wasX, newmove.wasY, 'E');
 					boardT.update_board();
 					boardT.draw_board();
