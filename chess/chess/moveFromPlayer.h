@@ -9,6 +9,7 @@
 # include "piece.h"
 # include "gameMode.h"
 # include "board.h"
+# include <memory>
 
 class moveFromPlayer
 {

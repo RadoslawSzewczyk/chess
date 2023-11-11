@@ -1,6 +1,6 @@
 # include "gameMode.h"
 #include <chrono>
-
+# include <climits>
 
 int evaluatePosition(board& board1) {
 	int score = 0;

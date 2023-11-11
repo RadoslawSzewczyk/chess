@@ -2,7 +2,9 @@
 # include <string>
 # include <iostream>
 # include <vector>
-
+# include <memory>
+# include <climits>
+# include <limits>
 
 class piece
 {
