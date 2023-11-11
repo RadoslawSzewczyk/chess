@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build",
+        "type": "shell",
+        "command": "g++",
+        "args": [
+          "-g",             // Generate debugging information
+          "-o",             // Output file option
+          "${fileDirname}/${fileBasenameNoExtension}", // Output binary name based on the source file's name
+          "${file}"         // Input source file
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "presentation": {
+          "reveal": "silent",
+          "panel": "dedicated"
+        }
+      }
+    ]
+  }
+  

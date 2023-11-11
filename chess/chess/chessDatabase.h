@@ -4,6 +4,7 @@
 # include <vector>
 # include <sstream>
 # include "piece.h"
+# include <memory>
 
 struct ChessPosition {
     std::string name;
