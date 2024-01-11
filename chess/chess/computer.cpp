@@ -27,14 +27,15 @@ int evaluatePosition(board& board1) {
 
 std::vector <moveFromPlayer> all_legal_moves(board& board1)
 {
-	board boardT;
-	//lapiemy jednego i lecimy tylko po wszystkich polach
+	
+
 	std::vector <moveFromPlayer> moves;
-	for (int k = 0; k < board1.pieceTab.size(); k++)
+	board boardT = board1;
+	for (int k = 0; k < boardT.pieceTab.size(); k++)
 	{
 		moveFromPlayer newmove;
-		newmove.wasX = board1.pieceTab[k]->x;
-		newmove.wasY = board1.pieceTab[k]->y;
+		newmove.wasX = boardT.pieceTab[k]->x;
+		newmove.wasY = boardT.pieceTab[k]->y;
 		for (int i = 0; i < 8; i++)
 		{
 			for (int j = 0; j < 8; j++)
@@ -42,22 +43,29 @@ std::vector <moveFromPlayer> all_legal_moves(board& board1)
 				newmove.willX = i;
 				newmove.willY = j;
 
-				if (board1.pieceTab[k]->validate_move(board1.whoToMove, board1.pieceTab[k]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, 0, 'E', board1.boardSTR, k, 0))
+				if (!boardT.pieceTab[k]->validate_move(boardT.whoToMove, boardT.pieceTab[k]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, 0, 'E', boardT.boardSTR, k, 0))
 				{
 					moves.push_back(newmove);
-					boardT.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, 'E');
-					boardT.update_board();
-					boardT.draw_board();
-					std::chrono::seconds timespan(500000000);
-					boardT.move_piece(newmove.willX, newmove.willY, newmove.wasX, newmove.wasY, 'E');
-					boardT.update_board();
-					boardT.draw_board();
+					//std::cout << "Legal move" << std::endl;
+
+					//// Make the move
+					//board1.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, 'E');
+					//board1.update_board();
+					//board1.draw_board();
+
+					//// Undo the move to restore the original state
+					//board1.move_piece(newmove.willX, newmove.willY, newmove.wasX, newmove.wasY, 'E');
+					//board1.update_board();
+					//board1.draw_board();
+					//std::cout << "Undo move" << std::endl;
+					//std::chrono::seconds dura(10);
 				}
 			}
 		}
 	}
 	return moves;
 }
+
 
 struct chessReturn
 {
@@ -74,6 +82,7 @@ chessReturn chessSearch(int depth, char color, board board1)
 	moveFromPlayer bestMove;
 	int bestScore = (color == WHITE) ? INT_MIN : INT_MAX;
 	chessReturn bestMoveAndEval;
+
 
 	if (depth == 0)
 	{
