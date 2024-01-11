@@ -33,17 +33,25 @@ bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 	if (whichT == 99)
 	{
 		isLegal = false;
+		goto STOPWASTINGMYTIME;
 	}
 
 	if (willX > 7 || willX < 0 || willY > 7 || willY < 0)
+	{
 		isLegal = false;
+		goto STOPWASTINGMYTIME;
+	}
 
 	if (abs(wasX - willX) > 1)
+	{
 		isLegal = false;
+		goto STOPWASTINGMYTIME;
+	}
 
 	if (board1[wasX][wasY] == "OO" || board1[wasX][wasY] == "XX" || whoToMove != pieceColour || board1[willX][willY][0] == whoToMoveC)
 	{
 		isLegal = false;
+		goto STOPWASTINGMYTIME;
 	}
 
 
@@ -51,57 +59,80 @@ bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 	if (whoToMove)
 	{
 		if (wasY - willY > 2)
+		{
 			isLegal = false;
-
+			goto STOPWASTINGMYTIME;
+		}
 		if (willY - wasY == 1 && wasX == willX)
 		{
 			if (wasX != willX && (board1[wasX][wasY - 1] != "OO" ^ board1[wasX][wasY - 1] != "XX"))
 			{
 				isLegal = false;
 				moveType = 0;
+				goto STOPWASTINGMYTIME;
 			}
 		}
 
 		else if (willY - wasY == 2 && isFirstMove && wasX == willX)
 		{
 			if (wasX != willX && (board1[wasX][wasY - 2] != "OO" ^ board1[wasX][wasY - 2] != "XX") && (board1[wasX][wasY - 1] != "OO" ^ board1[wasX][wasY - 1] != "XX"))
+			{
 				isLegal = false;
+				goto STOPWASTINGMYTIME;
+			}
 			moveType = 0;
 		}
 	
 		else if (abs(wasX - willX) == 1 && willY - wasY == -1)
 		{
-			if ((board1[willX][willY][0] != 'X' || board1[willX][willY][0] != 'O') && willY - wasY != -1)
+			if ((board1[willX][willY][0] == 'X' || board1[willX][willY][0] == 'O') && willY - wasY != -1)
+			{
 				isLegal = false;
+				goto STOPWASTINGMYTIME;
+			}
 		}
 	}
 	//white
 	else
 	{
 		if (willY - wasY > 2)
+		{
 			isLegal = false;
+			goto STOPWASTINGMYTIME;
+		}
 		if (willY - wasY == 1 && wasX == willX)
 		{
 			if (wasX != willX && (board1[wasX][wasY + 1] != "OO" ^ board1[wasX][wasY + 1] != "XX"))
+			{
 				isLegal = false;
+				goto STOPWASTINGMYTIME;
+			}
 			moveType = 0;
 		}
 
 		else if (willY - wasY == 2 && isFirstMove && wasX == willX)
 		{
 			if (wasX != willX && (board1[wasX][wasY + 2] != "OO" ^ board1[wasX][wasY + 2] != "XX") && (board1[wasX][wasY + 1] != "OO" ^ board1[wasX][wasY + 1] != "XX"))
+			{
 				isLegal = false;
+				goto STOPWASTINGMYTIME;
+			}
+
 			moveType = 0;
 		}
 
 		else if (abs(wasX - willX) == 1 && willY - wasY == 1)
 		{
-			if ((board1[willX][willY][0] != 'X' || board1[willX][willY][0] != 'O') && willY - wasY != 1)
+			if ((board1[willX][willY][0] == 'X' || board1[willX][willY][0] == 'O') && willY - wasY != 1)
+			{
 				isLegal = false;
+				goto STOPWASTINGMYTIME;
+			}
+
 		}
 	}
 
-
+	STOPWASTINGMYTIME:
 	if (!isLegal)
 	{
 		if (print)
