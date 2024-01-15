@@ -46,19 +46,6 @@ std::vector <moveFromPlayer> all_legal_moves(board& board1)
 				if (!boardT.pieceTab[k]->validate_move(boardT.whoToMove, boardT.pieceTab[k]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, 0, 'E', boardT.boardSTR, k, 0))
 				{
 					moves.push_back(newmove);
-					//std::cout << "Legal move" << std::endl;
-
-					//// Make the move
-					//board1.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, 'E');
-					//board1.update_board();
-					//board1.draw_board();
-
-					//// Undo the move to restore the original state
-					//board1.move_piece(newmove.willX, newmove.willY, newmove.wasX, newmove.wasY, 'E');
-					//board1.update_board();
-					//board1.draw_board();
-					//std::cout << "Undo move" << std::endl;
-					//std::chrono::seconds dura(10);
 				}
 			}
 		}
@@ -66,61 +53,37 @@ std::vector <moveFromPlayer> all_legal_moves(board& board1)
 	return moves;
 }
 
-
 struct chessReturn
 {
 	moveFromPlayer bestMove;
 	int eval;
 };
 
-chessReturn chessSearch(int depth, char color, board board1)
-{
-
-	const char WHITE = 'w';
-	const char BLACK = 'b';
-
-	moveFromPlayer bestMove;
-	int bestScore = (color == WHITE) ? INT_MIN : INT_MAX;
-	chessReturn bestMoveAndEval;
-
-
-	if (depth == 0)
-	{
-		bestMoveAndEval.bestMove = bestMove;
-		bestMoveAndEval.eval = evaluatePosition(board1);
-
-		return bestMoveAndEval;
+chessReturn chessSearch(int depth, bool color, board& board1) {
+	if (depth == 0) {
+		return { moveFromPlayer(), evaluatePosition(board1) };
 	}
 
 	std::vector<moveFromPlayer> moves = all_legal_moves(board1);
-	//ERR VECTOR OUT OF RANGE
-	for (int i = 0; i < moves.size(); i++)
-	{
-		
-		// Make the move on the chess board
-		board1.move_piece(moves[i].wasX, moves[i].wasY, moves[i].willX, moves[i].willY, 'E');
+	moveFromPlayer bestMove;
+	int bestScore = (color == 0) ? INT_MIN : INT_MAX;
 
-		// Recursively search the next position with decreased depth
-		chessReturn moveAndEval = chessSearch(depth - 1, (color == WHITE) ? BLACK : WHITE, board1);
-		int score = moveAndEval.eval;
-		moveFromPlayer move = moveAndEval.bestMove;
+	for (const auto& move : moves) {
+		board newBoard = board1;
+		newBoard.move_piece(move.wasX, move.wasY, move.willX, move.willY, move.promotionCH);
 
-		// Undo the move to explore other possibilities
-		board1.move_piece(moves[i].willX, moves[i].willY, moves[i].wasX, moves[i].wasY, 'E');
+		chessReturn nextMove = chessSearch(depth - 1, !color, newBoard);
+		int currentScore = nextMove.eval;
 
-
-		// Update the best move and score based on the current move
-		if ((color == WHITE && score > bestScore) || (color == BLACK && score < bestScore)) {
-			bestScore = score;
+		if ((color == 0 && currentScore > bestScore) || (color == 1 && currentScore < bestScore)) {
+			bestScore = currentScore;
 			bestMove = move;
 		}
 	}
 
-	bestMoveAndEval.bestMove = bestMove;
-	bestMoveAndEval.eval = bestScore;
-	// Return the best move found at this depth
-	return bestMoveAndEval;
+	return { bestMove, bestScore };
 }
+
 
 void computer()
 {
@@ -153,7 +116,7 @@ void computer()
 
 		if (board1.whoToMove == computerColour)
 		{
-			moveFromPlayer newmove = chessSearch(5, board1.whoToMove, board1).bestMove;
+			moveFromPlayer newmove = chessSearch(3, board1.whoToMove, board1).bestMove;
 			int whichT = newmove.which(board1);
 			board1.move_piece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH);
 			board1.whoToMove = !board1.whoToMove;

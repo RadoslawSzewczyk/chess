@@ -53,6 +53,11 @@ bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 		isLegal = false;
 		goto STOPWASTINGMYTIME;
 	}
+	if(willX == wasX && willY == wasY)
+	{
+		isLegal = false;
+		goto STOPWASTINGMYTIME;
+	}
 
 
 	//black
@@ -65,7 +70,7 @@ bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 		}
 		if (willY - wasY == 1 && wasX == willX)
 		{
-			if (wasX != willX && (board1[wasX][wasY - 1] != "OO" ^ board1[wasX][wasY - 1] != "XX"))
+			if (board1[willX][willY] != "OO" || board1[willX][willY] != "XX")
 			{
 				isLegal = false;
 				moveType = 0;
@@ -73,19 +78,29 @@ bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 			}
 		}
 
-		else if (willY - wasY == 2 && isFirstMove && wasX == willX)
+		if (willY - wasY == 2 && isFirstMove && wasX == willX)
 		{
-			if (wasX != willX && (board1[wasX][wasY - 2] != "OO" ^ board1[wasX][wasY - 2] != "XX") && (board1[wasX][wasY - 1] != "OO" ^ board1[wasX][wasY - 1] != "XX"))
+			if (wasX != willX && (board1[wasX][wasY - 2] != "OO" || board1[wasX][wasY - 2] != "XX") && (board1[wasX][wasY - 1] != "OO" || board1[wasX][wasY - 1] != "XX"))
 			{
 				isLegal = false;
 				goto STOPWASTINGMYTIME;
 			}
 			moveType = 0;
 		}
-	
-		else if (abs(wasX - willX) == 1 && willY - wasY == -1)
+		if (willY - wasY == 2 && isFirstMove == false)
 		{
-			if ((board1[willX][willY][0] == 'X' || board1[willX][willY][0] == 'O') && willY - wasY != -1)
+			isLegal = false;
+			goto STOPWASTINGMYTIME;
+		}
+		if (willY - wasY == -2 && wasX != willX)
+		{
+			isLegal = false;
+			goto STOPWASTINGMYTIME;
+		}
+	
+		if (wasX != willX && willY - wasY == -1)
+		{
+			if (board1[willX][willY][0] == 'X' || board1[willX][willY][0] == 'O')
 			{
 				isLegal = false;
 				goto STOPWASTINGMYTIME;
@@ -102,7 +117,7 @@ bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 		}
 		if (willY - wasY == 1 && wasX == willX)
 		{
-			if (wasX != willX && (board1[wasX][wasY + 1] != "OO" ^ board1[wasX][wasY + 1] != "XX"))
+			if (board1[willX][willY] != "OO" || board1[willX][willY] != "XX")
 			{
 				isLegal = false;
 				goto STOPWASTINGMYTIME;
@@ -110,9 +125,9 @@ bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 			moveType = 0;
 		}
 
-		else if (willY - wasY == 2 && isFirstMove && wasX == willX)
+		if (willY - wasY == 2 && isFirstMove && wasX == willX)
 		{
-			if (wasX != willX && (board1[wasX][wasY + 2] != "OO" ^ board1[wasX][wasY + 2] != "XX") && (board1[wasX][wasY + 1] != "OO" ^ board1[wasX][wasY + 1] != "XX"))
+			if (wasX != willX && (board1[wasX][wasY + 2] != "OO" || board1[wasX][wasY + 2] != "XX") && (board1[wasX][wasY + 1] != "OO" || board1[wasX][wasY + 1] != "XX"))
 			{
 				isLegal = false;
 				goto STOPWASTINGMYTIME;
@@ -121,14 +136,23 @@ bool pawn::validate_move(bool whoToMove, bool pieceColour, int wasX, int wasY, i
 			moveType = 0;
 		}
 
-		else if (abs(wasX - willX) == 1 && willY - wasY == 1)
+		if (wasX != willX && willY - wasY == 1)
 		{
-			if ((board1[willX][willY][0] == 'X' || board1[willX][willY][0] == 'O') && willY - wasY != 1)
+			if (board1[willX][willY][0] == 'X' || board1[willX][willY][0] == 'O')
 			{
 				isLegal = false;
 				goto STOPWASTINGMYTIME;
 			}
 
+		}
+		if (willY - wasY == 2 && isFirstMove == false)
+		{
+			isLegal = false;
+			goto STOPWASTINGMYTIME;
+		}
+		if (willY - wasY == -2 && abs(wasX - willX) != 0)
+		{
+			isLegal = false;
 		}
 	}
 
