@@ -1,6 +1,0 @@
-Chess TODO
-
-castle
-check fix
-checkmate fix ?
-fix saving to file
