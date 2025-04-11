@@ -1,0 +1,3 @@
+/home/radosz/repo/chess/build/CMakeFiles/chess.dir
+/home/radosz/repo/chess/build/CMakeFiles/edit_cache.dir
+/home/radosz/repo/chess/build/CMakeFiles/rebuild_cache.dir

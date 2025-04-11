@@ -1,0 +1,62 @@
+[
+{
+  "directory": "/home/radosz/repo/chess/build",
+  "command": "/usr/bin/g++  -I/home/radosz/repo/chess/src -g -Wall -Wextra -Werror -Wunused-variable -std=gnu++20 -o CMakeFiles/chess.dir/src/pieces/Bishop.cpp.o -c /home/radosz/repo/chess/src/pieces/Bishop.cpp",
+  "file": "/home/radosz/repo/chess/src/pieces/Bishop.cpp"
+},
+{
+  "directory": "/home/radosz/repo/chess/build",
+  "command": "/usr/bin/g++  -I/home/radosz/repo/chess/src -g -Wall -Wextra -Werror -Wunused-variable -std=gnu++20 -o CMakeFiles/chess.dir/src/Board.cpp.o -c /home/radosz/repo/chess/src/Board.cpp",
+  "file": "/home/radosz/repo/chess/src/Board.cpp"
+},
+{
+  "directory": "/home/radosz/repo/chess/build",
+  "command": "/usr/bin/g++  -I/home/radosz/repo/chess/src -g -Wall -Wextra -Werror -Wunused-variable -std=gnu++20 -o CMakeFiles/chess.dir/src/ChessDatabase.cpp.o -c /home/radosz/repo/chess/src/ChessDatabase.cpp",
+  "file": "/home/radosz/repo/chess/src/ChessDatabase.cpp"
+},
+{
+  "directory": "/home/radosz/repo/chess/build",
+  "command": "/usr/bin/g++  -I/home/radosz/repo/chess/src -g -Wall -Wextra -Werror -Wunused-variable -std=gnu++20 -o CMakeFiles/chess.dir/src/main.cpp.o -c /home/radosz/repo/chess/src/main.cpp",
+  "file": "/home/radosz/repo/chess/src/main.cpp"
+},
+{
+  "directory": "/home/radosz/repo/chess/build",
+  "command": "/usr/bin/g++  -I/home/radosz/repo/chess/src -g -Wall -Wextra -Werror -Wunused-variable -std=gnu++20 -o CMakeFiles/chess.dir/src/computer.cpp.o -c /home/radosz/repo/chess/src/computer.cpp",
+  "file": "/home/radosz/repo/chess/src/computer.cpp"
+},
+{
+  "directory": "/home/radosz/repo/chess/build",
+  "command": "/usr/bin/g++  -I/home/radosz/repo/chess/src -g -Wall -Wextra -Werror -Wunused-variable -std=gnu++20 -o CMakeFiles/chess.dir/src/pieces/King.cpp.o -c /home/radosz/repo/chess/src/pieces/King.cpp",
+  "file": "/home/radosz/repo/chess/src/pieces/King.cpp"
+},
+{
+  "directory": "/home/radosz/repo/chess/build",
+  "command": "/usr/bin/g++  -I/home/radosz/repo/chess/src -g -Wall -Wextra -Werror -Wunused-variable -std=gnu++20 -o CMakeFiles/chess.dir/src/pieces/Knight.cpp.o -c /home/radosz/repo/chess/src/pieces/Knight.cpp",
+  "file": "/home/radosz/repo/chess/src/pieces/Knight.cpp"
+},
+{
+  "directory": "/home/radosz/repo/chess/build",
+  "command": "/usr/bin/g++  -I/home/radosz/repo/chess/src -g -Wall -Wextra -Werror -Wunused-variable -std=gnu++20 -o CMakeFiles/chess.dir/src/moveFromPlayer.cpp.o -c /home/radosz/repo/chess/src/moveFromPlayer.cpp",
+  "file": "/home/radosz/repo/chess/src/moveFromPlayer.cpp"
+},
+{
+  "directory": "/home/radosz/repo/chess/build",
+  "command": "/usr/bin/g++  -I/home/radosz/repo/chess/src -g -Wall -Wextra -Werror -Wunused-variable -std=gnu++20 -o CMakeFiles/chess.dir/src/pieces/Pawn.cpp.o -c /home/radosz/repo/chess/src/pieces/Pawn.cpp",
+  "file": "/home/radosz/repo/chess/src/pieces/Pawn.cpp"
+},
+{
+  "directory": "/home/radosz/repo/chess/build",
+  "command": "/usr/bin/g++  -I/home/radosz/repo/chess/src -g -Wall -Wextra -Werror -Wunused-variable -std=gnu++20 -o CMakeFiles/chess.dir/src/pieces/Queen.cpp.o -c /home/radosz/repo/chess/src/pieces/Queen.cpp",
+  "file": "/home/radosz/repo/chess/src/pieces/Queen.cpp"
+},
+{
+  "directory": "/home/radosz/repo/chess/build",
+  "command": "/usr/bin/g++  -I/home/radosz/repo/chess/src -g -Wall -Wextra -Werror -Wunused-variable -std=gnu++20 -o CMakeFiles/chess.dir/src/pieces/Rook.cpp.o -c /home/radosz/repo/chess/src/pieces/Rook.cpp",
+  "file": "/home/radosz/repo/chess/src/pieces/Rook.cpp"
+},
+{
+  "directory": "/home/radosz/repo/chess/build",
+  "command": "/usr/bin/g++  -I/home/radosz/repo/chess/src -g -Wall -Wextra -Werror -Wunused-variable -std=gnu++20 -o CMakeFiles/chess.dir/src/twoHumans.cpp.o -c /home/radosz/repo/chess/src/twoHumans.cpp",
+  "file": "/home/radosz/repo/chess/src/twoHumans.cpp"
+}
+]
