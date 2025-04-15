@@ -91,7 +91,6 @@ exit_loop:
 
 		if (input[2] == 'Q' || input[2] == 'N' || input[2] == 'B' || input[2] == 'R')
 		{
-			moveType = 2;
 			promotionCH = input[2];
 		}
 		else
@@ -188,13 +187,13 @@ void moveFromPlayer::chooseGameMode()
 		{
 			clearScreen();
 			twoHumans();
-			break;
+			return;
 		}
 		else if (input == 2)
 		{
 			clearScreen();
 			computer();
-			break;
+			return;
 		}
 		else
 		{

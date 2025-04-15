@@ -14,8 +14,6 @@ struct validateMoveStruct
 	int wasY;
 	int willX;
 	int willY;
-	int moveType;
-	char promotion;
 	std::string board[8][8];
 	int whichT;
 	bool print;
@@ -34,7 +32,7 @@ public:
 	char typeChar;
 
 	//return 1 == illegal move // return 0 == legal
-	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int which, bool print) = 0;
+	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, std::string board1[8][8], int which, bool print) = 0;
 	virtual char typeCharF() = 0;
 
 };
@@ -48,7 +46,7 @@ public:
 
 	Pawn(int xC, int yC, bool colourC);
 
-	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int which, bool print);
+	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, std::string board1[8][8], int which, bool print);
 	
 
 	~Pawn();
@@ -64,7 +62,7 @@ public:
 
 	bool isKingAttacked(bool whoToMove, bool pieceColour, int kingX, int kingY, std::string board1[8][8]);
 
-	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int which, bool print);
+	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, std::string board1[8][8], int which, bool print);
 
 
 	~King();
@@ -75,7 +73,7 @@ class Bishop : public Piece
 public:
 	char typeCharF();
 	Bishop(int xC, int yC, bool colourC);
-	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int which, bool print);
+	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, std::string board1[8][8], int which, bool print);
 
 	~Bishop();
 };
@@ -85,7 +83,7 @@ class Rook : public Piece
 public:
 	char typeCharF();
 	Rook(int xC, int yC, bool colourC);
-	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int which, bool print);
+	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, std::string board1[8][8], int which, bool print);
 
 	~Rook();
 };
@@ -95,7 +93,7 @@ class Queen : public Piece
 public:
 	char typeCharF();
 	Queen(int xC, int yC, bool colourC);
-	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int which, bool print);
+	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, std::string board1[8][8], int which, bool print);
 
 	~Queen();
 };
@@ -105,7 +103,7 @@ class Knight : public Piece
 public:
 	char typeCharF();
 	Knight(int xC, int yC, bool colourC);
-	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int which, bool print);
+	virtual bool validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, std::string board1[8][8], int which, bool print);
 
 	~Knight();
 };

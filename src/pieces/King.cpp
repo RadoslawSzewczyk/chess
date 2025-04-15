@@ -22,7 +22,7 @@ King::King(int xC, int yC, bool colourC)
 }
 
 
-bool King::validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int which, bool print)
+bool King::validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, std::string board1[8][8], int which, bool print)
 {
 	char whoToMoveC;
 	if (whoToMove)
@@ -34,7 +34,7 @@ bool King::validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, in
 		isLegal = false;
 
 	std::string targetPiece = board1[willX][willY];
-	if (targetPiece != "OO" && targetPiece != "XX" || board1[willX][willY][0] == whoToMoveC) {
+	if ((targetPiece != "OO" && targetPiece != "XX") || board1[willX][willY][0] == whoToMoveC) {
 		isLegal = false;
 	}
 

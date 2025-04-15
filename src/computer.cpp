@@ -25,11 +25,11 @@ int evaluatePosition(Board& board) {
 	return score;
 }
 
-std::vector <moveFromPlayer> all_legal_moves(Board& board)
+std::vector <moveFromPlayer> allLegalMoves(Board& board)
 {
 	std::vector <moveFromPlayer> moves;
 	Board boardT = board;
-	for (int k = 0; k < boardT.pieceTab.size(); k++)
+	for (int k = 0; k < static_cast<int>(boardT.pieceTab.size()); k++)
 	{
 		moveFromPlayer newmove;
 		newmove.wasX = boardT.pieceTab[k]->x;
@@ -41,7 +41,7 @@ std::vector <moveFromPlayer> all_legal_moves(Board& board)
 				newmove.willX = i;
 				newmove.willY = j;
 
-				if (!boardT.pieceTab[k]->validateMove(boardT.whoToMove, boardT.pieceTab[k]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, 0, 'E', boardT.boardSTR, k, 0))
+				if (!boardT.pieceTab[k]->validateMove(boardT.whoToMove, boardT.pieceTab[k]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, boardT.boardSTR, k, 0))
 				{
 					moves.push_back(newmove);
 				}
@@ -64,7 +64,7 @@ chessReturn chessSearch(int depth, bool color, Board& board)
 		return { moveFromPlayer(), evaluatePosition(board) };
 	}
 
-	std::vector<moveFromPlayer> moves = all_legal_moves(board);
+	std::vector<moveFromPlayer> moves = allLegalMoves(board);
 	moveFromPlayer bestMove;
 	int bestScore = (color == 0) ? INT_MIN : INT_MAX;
 
@@ -118,7 +118,6 @@ void computer()
 		if (board.whoToMove == computerColour)
 		{
 			moveFromPlayer newmove = chessSearch(3, board.whoToMove, board).bestMove;
-			int pieceInTabIndex = newmove.which(board);
 			board.movePiece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH);
 			board.whoToMove = !board.whoToMove;
 			continue;
@@ -152,7 +151,7 @@ void computer()
 				board.castle(0);
 				goto castleend;
 			}
-			isMoveToBeReEntered = board.pieceTab[pieceInTabIndex]->validateMove(board.whoToMove, board.pieceTab[pieceInTabIndex]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.moveType, newmove.promotionCH, board.boardSTR, pieceInTabIndex, 1);
+			isMoveToBeReEntered = board.pieceTab[pieceInTabIndex]->validateMove(board.whoToMove, board.pieceTab[pieceInTabIndex]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, board.boardSTR, pieceInTabIndex, 1);
 
 			if (board.isKingInCheck())
 			{
@@ -166,7 +165,7 @@ void computer()
 		board.movePiece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH);
 		board.updateBoard();
 	castleend:
-		if (board.is_checkmate())
+		if (board.isCheckmate())
 		{
 			std::cout << "Checkmate! " << board.whoToMoveF() << " wins." << std::endl;
 			break;

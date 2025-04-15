@@ -20,7 +20,7 @@ Pawn::Pawn(int xC, int yC, bool colourC)
 	}
 }
 
-bool Pawn::validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int whichT, bool print)
+bool Pawn::validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, std::string board1[8][8], int whichT, bool print)
 {
 	bool isLegal = true;
 
@@ -73,7 +73,6 @@ bool Pawn::validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, in
 			if (board1[willX][willY] != "OO" || board1[willX][willY] != "XX")
 			{
 				isLegal = false;
-				moveType = 0;
 				goto STOPWASTINGMYTIME;
 			}
 		}
@@ -85,7 +84,6 @@ bool Pawn::validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, in
 				isLegal = false;
 				goto STOPWASTINGMYTIME;
 			}
-			moveType = 0;
 		}
 		if (willY - wasY == 2 && isFirstMove == false)
 		{
@@ -122,7 +120,6 @@ bool Pawn::validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, in
 				isLegal = false;
 				goto STOPWASTINGMYTIME;
 			}
-			moveType = 0;
 		}
 
 		if (willY - wasY == 2 && isFirstMove && wasX == willX)
@@ -133,7 +130,6 @@ bool Pawn::validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, in
 				goto STOPWASTINGMYTIME;
 			}
 
-			moveType = 0;
 		}
 
 		if (wasX != willX && willY - wasY == 1)

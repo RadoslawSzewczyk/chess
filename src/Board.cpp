@@ -67,12 +67,12 @@ void Board::movePiece(int wasX, int wasY, int willX, int willY, char promotion)
 	int which;//TODO
 	int t = std::numeric_limits<int>::max();
 
-	for (int i = 0; i < pieceTab.size(); i++)
+	for (int i = 0; i < static_cast<int>(pieceTab.size()); i++)
 	{
 		if (pieceTab[i]->x == willX && pieceTab[i]->y == willY)
 			t = i;
 	}
-	for (int i = 0; i < pieceTab.size(); i++)
+	for (int i = 0; i < static_cast<int>(pieceTab.size()); i++)
 	{
 		if (wasX == pieceTab[i]->x && wasY == pieceTab[i]->y)
 		{
@@ -88,14 +88,14 @@ void Board::movePiece(int wasX, int wasY, int willX, int willY, char promotion)
 	{
 
 	}
-	if (t > pieceTab.size())
+	if (t > static_cast<int>(pieceTab.size()))
 	{
 		pieceTab[which]->x = willX;
 		pieceTab[which]->y = willY;
 	}
 	else if (promotion != 'E')
 	{
-		if (whoToMove = 0 && wasY == 6 && willY == 7)
+		if (whoToMove == 0 && wasY == 6 && willY == 7)
 		{
 			if (promotion == 'Q')
 			{
@@ -118,7 +118,7 @@ void Board::movePiece(int wasX, int wasY, int willX, int willY, char promotion)
 				pieceTab.push_back(Wbishop);
 			}
 		}
-		else if (whoToMove = 1 && wasY == 1 && willY == 0)
+		else if (whoToMove == 1 && wasY == 1 && willY == 0)
 		{
 			if (promotion == 'Q')
 			{
@@ -182,7 +182,7 @@ void Board::updateBoard()
 		tDraw *= -1;
 	}
 
-	for (int i = 0; i < pieceTab.size(); i++)
+	for (int i = 0; i < static_cast<int>(pieceTab.size()); i++)
 	{
 		boardSTR[pieceTab[i]->x][pieceTab[i]->y] = pieceTab[i]->nameSTR;
 	}
@@ -191,7 +191,7 @@ void Board::updateBoard()
 
 int Board::pieceCount()
 {
-	return int(pieceTab.size());
+	return int(static_cast<int>(pieceTab.size()));
 }
 
 std::string Board::whoToMoveF()
@@ -224,7 +224,7 @@ bool Board::isKingInCheck(int kingX, int kingY)
 
 	for (int i = 0; i < pieceCount(); i++)
 	{
-		if (!pieceTab[i]->validateMove(whoToMove, pieceTab[i]->colour, pieceTab[i]->x, pieceTab[i]->y, kingX, kingY, 0, 'E', boardSTR, i,0))
+		if (!pieceTab[i]->validateMove(whoToMove, pieceTab[i]->colour, pieceTab[i]->x, pieceTab[i]->y, kingX, kingY, boardSTR, i,0))
 		{
 			return true;
 		}
@@ -251,7 +251,7 @@ bool Board::isOpponentKingInCheck()
 
 	for (int i = 0; i < pieceCount(); i++)
 	{
-		if (!pieceTab[i]->validateMove(!whoToMove, pieceTab[i]->colour, pieceTab[i]->x, pieceTab[i]->y, kingX, kingY, 0, 'E', boardSTR, i, 0))
+		if (!pieceTab[i]->validateMove(!whoToMove, pieceTab[i]->colour, pieceTab[i]->x, pieceTab[i]->y, kingX, kingY, boardSTR, i, 0))
 		{
 			return true;
 		}
@@ -260,10 +260,8 @@ bool Board::isOpponentKingInCheck()
 	return false;
 }
 
-bool Board::is_checkmate()
+bool Board::isCheckmate()
 {
-	int legalMoves = 0;
-
 	int kingX = -1;
 	int kingY = -1;
 	int kingIndex = -1;
@@ -272,7 +270,7 @@ bool Board::is_checkmate()
 	if (!isOpponentKingInCheck())
 		return false;
 
-	for (int i = 0; i < pieceTab.size(); i++)
+	for (int i = 0; i < static_cast<int>(pieceTab.size()); i++)
 	{
 		if (pieceTab[i]->nameSTR[1] == 'K' && pieceTab[i]->nameSTR[0] != (whoToMove ? 'B' : 'W'))
 		{
@@ -296,7 +294,7 @@ bool Board::is_checkmate()
 	}
 
 
-	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX + 1, kingY + 1, 0, 'E', boardSTR, kingIndex, 0))
+	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX + 1, kingY + 1, boardSTR, kingIndex, 0))
 	{
 		tempBoard.movePiece(kingX, kingY, kingX + 1, kingY + 1, 0);
 		tempBoard.updateBoard();
@@ -307,7 +305,7 @@ bool Board::is_checkmate()
 	tempBoard.whoToMove = whoToMove;
 	tempBoard.pieceTab = pieceTab;
 
-	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX + 1, kingY, 0, 'E', boardSTR, kingIndex, 0))
+	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX + 1, kingY, boardSTR, kingIndex, 0))
 	{
 		tempBoard.movePiece(kingX, kingY, kingX + 1, kingY + 1, 'E');
 		tempBoard.updateBoard();
@@ -318,7 +316,7 @@ bool Board::is_checkmate()
 
 	tempBoard.whoToMove = whoToMove;
 	tempBoard.pieceTab = pieceTab;
-	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX + 1, kingY - 1, 0, 'E', boardSTR, kingIndex, 0))
+	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX + 1, kingY - 1, boardSTR, kingIndex, 0))
 	{
 		tempBoard.movePiece(kingX, kingY, kingX + 1, kingY - 1, 'E');
 		tempBoard.updateBoard();
@@ -329,7 +327,7 @@ bool Board::is_checkmate()
 
 	tempBoard.whoToMove = whoToMove;
 	tempBoard.pieceTab = pieceTab;
-	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX - 1, kingY - 1, 0, 'E', boardSTR, kingIndex, 0))
+	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX - 1, kingY - 1, boardSTR, kingIndex, 0))
 	{
 		tempBoard.movePiece(kingX, kingY, kingX - 1, kingY - 1, 'E');
 		tempBoard.updateBoard();
@@ -340,7 +338,7 @@ bool Board::is_checkmate()
 
 	tempBoard.whoToMove = whoToMove;
 	tempBoard.pieceTab = pieceTab;
-	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX, kingY - 1, 0, 'E', boardSTR, kingIndex, 0))
+	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX, kingY - 1, boardSTR, kingIndex, 0))
 	{
 		tempBoard.movePiece(kingX, kingY, kingX, kingY - 1, 'E');
 		tempBoard.updateBoard();
@@ -351,7 +349,7 @@ bool Board::is_checkmate()
 
 	tempBoard.whoToMove = whoToMove;
 	tempBoard.pieceTab = pieceTab;
-	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX - 1, kingY, 0, 'E', boardSTR, kingIndex, 0))
+	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX - 1, kingY, boardSTR, kingIndex, 0))
 	{
 		tempBoard.movePiece(kingX, kingY, kingX - 1, kingY, 'E');
 		tempBoard.updateBoard();
@@ -362,7 +360,7 @@ bool Board::is_checkmate()
 
 	tempBoard.whoToMove = whoToMove;
 	tempBoard.pieceTab = pieceTab;
-	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX - 1, kingY + 1, 0, 'E', boardSTR, kingIndex, 0))
+	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX - 1, kingY + 1, boardSTR, kingIndex, 0))
 	{
 		tempBoard.movePiece(kingX, kingY, kingX - 1, kingY + 1, 'E');
 		tempBoard.updateBoard();
@@ -373,7 +371,7 @@ bool Board::is_checkmate()
 
 	tempBoard.whoToMove = whoToMove;
 	tempBoard.pieceTab = pieceTab;
-	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX , kingY + 1, 0, 'E', boardSTR, kingIndex, 0))
+	if (!pieceTab[kingIndex]->validateMove(!whoToMove, pieceTab[kingIndex]->colour, kingX, kingY, kingX , kingY + 1, boardSTR, kingIndex, 0))
 	{
 		tempBoard.movePiece(kingX, kingY, kingX, kingY + 1, 'E');
 		tempBoard.updateBoard();

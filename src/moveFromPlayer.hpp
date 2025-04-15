@@ -22,8 +22,6 @@ public:
 
 	int wasX, wasY, willX, willY;
 
-	int moveType = 5; //0 move 1 capture 2 promotion 3 castle 4 long castle
-
 	char promotionCH = 'E';
 
 	std::string rawInput = "";

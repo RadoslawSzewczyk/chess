@@ -25,7 +25,7 @@ public:
 
 	std::string whoToMoveF();
 
-	bool is_checkmate();
+	bool isCheckmate();
 
 	bool isKingInCheck(int kingX = -1, int kingY = -1);
 

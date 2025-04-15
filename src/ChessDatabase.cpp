@@ -11,7 +11,7 @@ bool ChessDatabase::printAllPositions()
         return 1;
     }
 
-    for (int i = 0; i < positions.size(); i++) {
+    for (int i = 0; i < static_cast<int>(positions.size()); i++) {
         std::cout << "Index: " << i  << std::endl;
         std::cout << "Name: " << positions[i].name << std::endl;
         std::cout << "Date: " << positions[i].date << std::endl;
@@ -36,7 +36,7 @@ void ChessDatabase::savePositionsToFile()
             file << "Black to castle: " << position.blackCastle << "\n";
             file << "Who to move: " << position.whoToMove << "\n";
 
-            for (int i = 0; i < position.pieceTab.size(); i++)
+            for (int i = 0; i < static_cast<int>(position.pieceTab.size()); i++)
             {
 
                 file << position.pieceTab[i]->x << position.pieceTab[i]->y << position.pieceTab[i]->colour << position.pieceTab[i]->typeCharF() << std::endl;

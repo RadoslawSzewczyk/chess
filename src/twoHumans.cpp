@@ -2,7 +2,6 @@
 
 void twoHumans()
 {
-
     Board board;
     ChessDatabase database;
     database.loadPositionsFromFile();
@@ -39,7 +38,7 @@ void twoHumans()
                 goto castleend;
             }
 
-            isMoveToBeReEntered = board.pieceTab[pieceInTabIndex]->validateMove(board.whoToMove, board.pieceTab[pieceInTabIndex]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.moveType, newmove.promotionCH, board.boardSTR, pieceInTabIndex, 1);
+            isMoveToBeReEntered = board.pieceTab[pieceInTabIndex]->validateMove(board.whoToMove, board.pieceTab[pieceInTabIndex]->colour, newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, board.boardSTR, pieceInTabIndex, 1);
 
             if (board.isKingInCheck())
             {
@@ -53,7 +52,7 @@ void twoHumans()
         board.movePiece(newmove.wasX, newmove.wasY, newmove.willX, newmove.willY, newmove.promotionCH);
         board.updateBoard();
     castleend:
-        if (board.is_checkmate())
+        if (board.isCheckmate())
         {
             std::cout << "Checkmate! " << board.whoToMoveF() << " wins." << std::endl;
             break;

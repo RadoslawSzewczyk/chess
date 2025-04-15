@@ -21,7 +21,7 @@ Rook::Rook(int xC, int yC, bool colourC)
 	}
 }
 
-bool Rook::validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, int moveType, char promotion, std::string board1[8][8], int whichT, bool print)
+bool Rook::validateMove(bool whoToMove, bool pieceColour, int wasX, int wasY, int willX, int willY, std::string board1[8][8], int whichT, bool print)
 {
 	char whoToMoveC;
 	if (whoToMove)
